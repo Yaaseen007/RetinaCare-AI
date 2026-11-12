@@ -1,0 +1,230 @@
+/* ==============================================================================
+   RetinaCare AI - Apple Liquid Glass Design System & Theming Tokens
+   Engineered for medical AI precision, translucent optics, and spatial depth
+   ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    /* -------------------------------------------------------------------------
+       Spatial Spacing Scale (4px / 8px system)
+       ------------------------------------------------------------------------- */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+
+    /* Content Max Width */
+    --content-max-width: 1240px;
+
+    /* Border Radii (Consistent Glass Curve Hierarchy) */
+    --radius-xs: 8px;
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 26px;
+    --radius-xl: 34px;
+    --radius-pill: 9999px;
+
+    /* Font Stacks */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-heading: 'Plus Jakarta Sans', var(--font-sans);
+    --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    /* Motion Curves */
+    --ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
+    --ease-spring: cubic-bezier(0.34, 1.35, 0.64, 1);
+
+    /* Durations */
+    --duration-fast: 150ms;
+    --duration-btn: 200ms;
+    --duration-card: 280ms;
+    --duration-page: 400ms;
+    --duration-reveal: 520ms;
+
+    /* ICDR Retinopathy Clinical Severity Colors */
+    --color-stage-0: #42D6A4; /* No DR - Success Emerald */
+    --color-stage-1: #78DCE8; /* Mild NPDR - Soft Cyan */
+    --color-stage-2: #F4BD64; /* Moderate NPDR - Amber Warning */
+    --color-stage-3: #FF9248; /* Severe NPDR - Vibrant Tangerine */
+    --color-stage-4: #FF727C; /* Proliferative DR (PDR) - Precision Crimson */
+
+    /* Universal Gradient Accents */
+    --gradient-liquid: linear-gradient(135deg, #4F8CFF 0%, #78DCE8 50%, #9B8AFB 100%);
+    --gradient-glow: radial-gradient(circle at center, rgba(79, 140, 255, 0.16) 0%, rgba(155, 138, 251, 0.08) 50%, transparent 75%);
+}
+
+/* =============================================================================
+   DARK MODE PALETTE — Deep Midnight Navy & Atmospheric Optical Glass (Default)
+   ============================================================================= */
+[data-theme="dark"],
+:root {
+    /* Background Canvas & Elevated Layers */
+    --bg-canvas: #0B1220;
+    --bg-subtle: #101B30;
+    --bg-elevated: #162442;
+
+    /* Text System */
+    --text-primary: #F5F7FC;
+    --text-secondary: #A8B3C7;
+    --text-tertiary: #6E7C94;
+    --text-quaternary: #47546B;
+
+    /* Primary Accent Palette */
+    --accent-blue: #4F8CFF;
+    --accent-blue-subtle: rgba(79, 140, 255, 0.12);
+    --accent-blue-border: rgba(79, 140, 255, 0.36);
+
+    --accent-cyan: #78DCE8;
+    --accent-cyan-subtle: rgba(120, 220, 232, 0.12);
+    --accent-cyan-border: rgba(120, 220, 232, 0.36);
+    --accent-teal: var(--accent-cyan);
+    --accent-teal-subtle: var(--accent-cyan-subtle);
+    --accent-teal-border: var(--accent-cyan-border);
+
+    --accent-violet: #9B8AFB;
+    --accent-violet-subtle: rgba(155, 138, 251, 0.14);
+    --accent-violet-border: rgba(155, 138, 251, 0.38);
+
+    --accent-emerald: #42D6A4;
+    --accent-emerald-subtle: rgba(66, 214, 164, 0.12);
+    --accent-emerald-border: rgba(66, 214, 164, 0.32);
+
+    --accent-amber: #F4BD64;
+    --accent-amber-subtle: rgba(244, 189, 100, 0.12);
+    --accent-amber-border: rgba(244, 189, 100, 0.32);
+
+    --accent-red: #FF727C;
+    --accent-red-subtle: rgba(255, 114, 124, 0.12);
+    --accent-red-border: rgba(255, 114, 124, 0.32);
+
+    /* -------------------------------------------------------------------------
+       Liquid Glass Hierarchy (Translucent Optics & Realistic Caustics)
+       ------------------------------------------------------------------------- */
+    /* Primary Glass: Main navigation, primary results champion card, active modals */
+    --glass-primary-bg: rgba(16, 27, 48, 0.72);
+    --glass-primary-border: rgba(255, 255, 255, 0.13);
+    --glass-primary-shadow: 0 20px 48px -8px rgba(3, 8, 20, 0.65), inset 0 1px 1px 0 rgba(255, 255, 255, 0.18);
+    --glass-primary-blur: blur(28px) saturate(190%);
+
+    /* Secondary Glass: Dashboard panels, metric cards, preview stages, alternative cards */
+    --glass-secondary-bg: rgba(16, 27, 48, 0.52);
+    --glass-secondary-border: rgba(255, 255, 255, 0.08);
+    --glass-secondary-shadow: 0 12px 32px 0 rgba(3, 8, 20, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.10);
+    --glass-secondary-blur: blur(20px) saturate(180%);
+
+    /* Subtle Glass: Floating controls, segmented selectors, input fields, badges */
+    --glass-subtle-bg: rgba(16, 27, 48, 0.38);
+    --glass-subtle-border: rgba(255, 255, 255, 0.06);
+    --glass-subtle-shadow: 0 6px 18px 0 rgba(3, 8, 20, 0.30);
+    --glass-subtle-blur: blur(14px) saturate(160%);
+
+    /* Unified Semantic Aliases */
+    --surface-card: var(--glass-secondary-bg);
+    --surface-card-hover: rgba(22, 38, 68, 0.68);
+    --surface-card-active: rgba(16, 27, 48, 0.60);
+    --surface-glass: var(--glass-primary-bg);
+    --surface-input: rgba(11, 18, 32, 0.65);
+    --surface-dropdown: #121D33;
+
+    --border-hairline: var(--glass-secondary-border);
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --border-hover: rgba(255, 255, 255, 0.22);
+    --border-focus: rgba(79, 140, 255, 0.70);
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-card: var(--glass-secondary-shadow);
+    --shadow-card-hover: 0 18px 48px -4px rgba(3, 8, 20, 0.75), 0 0 28px rgba(79, 140, 255, 0.16);
+    --shadow-nav: var(--glass-primary-shadow);
+    --shadow-modal: 0 28px 72px -12px rgba(0, 0, 0, 0.88);
+
+    --glass-blur: var(--glass-secondary-blur);
+    --webkit-glass-blur: var(--glass-secondary-blur);
+}
+
+/* =============================================================================
+   LIGHT MODE PALETTE — Pure Medical Frost & Crisp Translucent Glass
+   ============================================================================= */
+[data-theme="light"] {
+    --bg-canvas: #F8FAFC;
+    --bg-subtle: #EDF2F7;
+    --bg-elevated: #FFFFFF;
+
+    --text-primary: #0B1220;
+    --text-secondary: #4A5568;
+    --text-tertiary: #718096;
+    --text-quaternary: #A0AEC0;
+
+    --accent-blue: #3B7BF6;
+    --accent-blue-subtle: rgba(59, 123, 246, 0.08);
+    --accent-blue-border: rgba(59, 123, 246, 0.30);
+
+    --accent-cyan: #0FB5C8;
+    --accent-cyan-subtle: rgba(15, 181, 200, 0.08);
+    --accent-cyan-border: rgba(15, 181, 200, 0.30);
+    --accent-teal: var(--accent-cyan);
+    --accent-teal-subtle: var(--accent-cyan-subtle);
+    --accent-teal-border: var(--accent-cyan-border);
+
+    --accent-violet: #8472F2;
+    --accent-violet-subtle: rgba(132, 114, 242, 0.09);
+    --accent-violet-border: rgba(132, 114, 242, 0.32);
+
+    --accent-emerald: #10B981;
+    --accent-emerald-subtle: rgba(16, 185, 129, 0.08);
+    --accent-emerald-border: rgba(16, 185, 129, 0.28);
+
+    --accent-amber: #E29924;
+    --accent-amber-subtle: rgba(226, 153, 36, 0.08);
+    --accent-amber-border: rgba(226, 153, 36, 0.28);
+
+    --accent-red: #EF4444;
+    --accent-red-subtle: rgba(239, 68, 68, 0.08);
+    --accent-red-border: rgba(239, 68, 68, 0.28);
+
+    /* Light Liquid Glass Hierarchies */
+    --glass-primary-bg: rgba(255, 255, 255, 0.88);
+    --glass-primary-border: rgba(15, 23, 42, 0.12);
+    --glass-primary-shadow: 0 16px 44px -4px rgba(15, 23, 42, 0.12), inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+    --glass-primary-blur: blur(28px) saturate(180%);
+
+    --glass-secondary-bg: rgba(255, 255, 255, 0.78);
+    --glass-secondary-border: rgba(15, 23, 42, 0.09);
+    --glass-secondary-shadow: 0 8px 24px -2px rgba(15, 23, 42, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    --glass-secondary-blur: blur(20px) saturate(170%);
+
+    --glass-subtle-bg: rgba(235, 240, 248, 0.85);
+    --glass-subtle-border: rgba(15, 23, 42, 0.10);
+    --glass-subtle-shadow: 0 4px 14px 0 rgba(15, 23, 42, 0.06);
+    --glass-subtle-blur: blur(14px) saturate(150%);
+
+    --surface-card: var(--glass-secondary-bg);
+    --surface-card-hover: rgba(255, 255, 255, 0.92);
+    --surface-card-active: rgba(241, 245, 249, 0.88);
+    --surface-glass: var(--glass-primary-bg);
+    --surface-input: #FFFFFF;
+    --surface-dropdown: #FFFFFF;
+
+    --border-hairline: var(--glass-secondary-border);
+    --border-subtle: rgba(0, 0, 0, 0.04);
+    --border-hover: rgba(0, 0, 0, 0.18);
+    --border-focus: rgba(59, 123, 246, 0.65);
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-card: var(--glass-secondary-shadow);
+    --shadow-card-hover: 0 14px 36px -4px rgba(11, 18, 32, 0.12), 0 0 20px rgba(59, 123, 246, 0.10);
+    --shadow-nav: var(--glass-primary-shadow);
+    --shadow-modal: 0 24px 56px -8px rgba(11, 18, 32, 0.16);
+
+    --glass-blur: var(--glass-secondary-blur);
+    --webkit-glass-blur: var(--glass-secondary-blur);
+}
+

@@ -1,0 +1,31 @@
+# Diabetic Retinopathy Detection Using CNN - Requirements
+# Compatible with Python 3.9, 3.10, 3.11, 3.12
+
+# Core Deep Learning & Machine Learning
+tensorflow>=2.15.0
+scikit-learn>=1.3.0
+
+# Scientific Computing & Data Manipulation
+numpy>=1.24.0,<2.0.0
+pandas>=2.0.0
+
+# Image Processing & Computer Vision
+opencv-python>=4.8.0
+Pillow>=10.0.0
+
+# API Backend & Web Services (Production HTML5/CSS3/Vanilla JS Frontend)
+# Note: Active user-facing frontend is now decoupled and does not require Streamlit.
+fastapi>=0.110.0
+uvicorn>=0.27.0
+pydantic>=2.0.0
+python-multipart>=0.0.9
+requests>=2.31.0
+
+# Visualization & Reporting
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.18.0
+
+# Jupyter Notebook Environment (optional for running notebooks locally)
+ipykernel>=6.25.0
+notebook>=7.0.0

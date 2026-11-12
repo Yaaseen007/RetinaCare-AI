@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetinaCare AI — Intelligent Retinal Health Screening</title>
+    <meta name="description" content="Clinical decision support and deep learning ophthalmic screening platform for Diabetic Retinopathy powered by VGG16 for Web and MobileNetV2 for Mobile.">
+    <meta name="theme-color" content="#07090E">
+
+    <!-- Design System Stylesheets -->
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Chart.js for High-Precision Performance Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+    <!-- =========================================================================
+         1. Apple-Inspired Magnetic Liquid Glass Dock Navigation (Top Center)
+         ========================================================================= -->
+    <header class="magnetic-dock-wrapper" id="dockWrapper">
+        <nav class="magnetic-dock" id="magneticDock" aria-label="RetinaCare AI Main Navigation">
+            <!-- Brand Emblem (Links to Home) -->
+            <a href="#home" class="dock-brand" data-dock-target="home" aria-label="RetinaCare AI Home" title="RetinaCare AI">
+                <div class="dock-brand-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                    </svg>
+                </div>
+                <span class="dock-brand-label">RetinaCare</span>
+            </a>
+
+            <div class="dock-divider" aria-hidden="true"></div>
+
+            <!-- Dock Navigation Items (7 Required Items) -->
+            <div class="dock-items" id="dockItems" role="menubar">
+                <!-- 1. Home -->
+                <button type="button" class="dock-item active" data-dock-target="home" role="menuitem" tabindex="0" aria-label="Home" aria-current="page">
+                    <span class="dock-icon-wrapper">
+                        <!-- Lucide Home SVG -->
+                        <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </span>
+                    <span class="dock-active-dot" aria-hidden="true"></span>
+                    <span class="dock-tooltip" role="tooltip">Home</span>
+                </button>
+
+                <!-- 2. AI Screening -->
+                <button type="button" class="dock-item" data-dock-target="prediction" role="menuitem" tabindex="0" aria-label="AI Screening">
+                    <span class="dock-icon-wrapper">
+                        <!-- Lucide ScanEye / Retinal Aperture Scanner SVG -->
+                        <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M2 12C2 12 5.636 5 12 5s10 7 10 7-3.636 7-10 7-10-7-10-7Z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+                            <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+                            <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+                            <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+                        </svg>
+                    </span>
+                    <span class="dock-active-dot" aria-hidden="true"></span>
+                    <span class="dock-tooltip" role="tooltip">AI Screening</span>
+                </button>
+
+                <!-- 3. Dashboard -->
+                <button type="button" class="dock-item" data-dock-target="performance" role="menuitem" tabindex="0" aria-label="Dashboard">
+                    <span class="dock-icon-wrapper">
+                        <!-- Lucide LayoutDashboard SVG -->
+                        <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect width="7" height="9" x="3" y="3" rx="1"/>
+                            <rect width="7" height="5" x="14" y="3" rx="1"/>
+                            <rect width="7" height="9" x="14" y="12" rx="1"/>
+                            <rect width="7" height="5" x="3" y="16" rx="1"/>
+                        </svg>
+                    </span>
+                    <span class="dock-active-dot" aria-hidden="true"></span>
+                    <span class="dock-tooltip" role="tooltip">Dashboard</span>
+                </button>
+
+                <!-- 4. Model Performance -->
+                <button type="button" class="dock-item" data-dock-target="benchmark" role="menuitem" tabindex="0" aria-label="Model Performance">
+                    <span class="dock-icon-wrapper">
+                        <!-- Lucide LineChart / Performance Analytics SVG -->
+                        <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M3 3v18h18"/>
+                            <path d="m19 9-5 5-4-4-3 3"/>
+                        </svg>
+                    </span>
+                    <span class="dock-active-dot" aria-hidden="true"></span>
+                    <span class="dock-tooltip" role="tooltip">Model Performance</span>
+                </button>
+
+                <!-- 5. About -->
+                <button type="button" class="dock-item" data-dock-target="about" role="menuitem" tabindex="0" aria-label="About">
+                    <span class="dock-icon-wrapper">
+                        <!-- Lucide Info SVG -->
+                        <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4"/>
+                            <path d="M12 8h.01"/>
+                        </svg>
+                    </span>
+                    <span class="dock-active-dot" aria-hidden="true"></span>
+                    <span class="dock-tooltip" role="tooltip">About</span>
+                </button>
+
+                <!-- 6. Contact -->
+                <button type="button" class="dock-item" data-dock-target="contact" role="menuitem" tabindex="0" aria-label="Contact">
+                    <span class="dock-icon-wrapper">
+                        <!-- Lucide Mail SVG -->
+                        <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect width="20" height="16" x="2" y="4" rx="2"/>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                        </svg>
+                    </span>
+                    <span class="dock-active-dot" aria-hidden="true"></span>
+                    <span class="dock-tooltip" role="tooltip">Contact</span>
+                </button>
+            </div>
+
+            <div class="dock-divider" aria-hidden="true"></div>
+
+            <!-- Dock System Utilities (7. Settings & Quick Theme Toggle) -->
+            <div class="dock-actions">
+                <!-- 7. Settings -->
+                <button type="button" class="dock-item dock-settings-btn" id="dockSettingsBtn" data-dock-target="settings" role="menuitem" tabindex="0" aria-label="Settings" aria-haspopup="dialog">
+                    <span class="dock-icon-wrapper">
+                        <!-- Lucide Settings SVG -->
+                        <svg class="dock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </span>
+                    <span class="dock-tooltip" role="tooltip">Settings</span>
+                </button>
+
+                <!-- Preserved Theme Toggle Button for app.js and theme.js -->
+                <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Light and Dark Mode" title="Toggle Theme">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1z"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- =========================================================================
+         2. Main Application Wrapper
+         ========================================================================= -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- =================================================================
+                 SECTION 1: HOME (Apple Liquid Glass Hero & Spatial Composition)
+                 ================================================================= -->
+            <section id="view-home" class="view-section active-view page-enter">
+                <div class="hero-stage">
+                    <div class="hero-glow"></div>
+                    <div class="hero-grid-layout">
+                        <!-- Left: Editorial Content & CTAs -->
+                        <div class="hero-content">
+                            <div class="hero-badge hero-animate-badge">
+                                <span class="pulse-dot"></span>
+                                <span>AI-Powered Retinal Screening</span>
+                            </div>
+
+                            <h1 class="hero-headline hero-animate-heading">
+                                See Beyond<br>
+                                <span class="apple-gradient-text">the Image.</span>
+                            </h1>
+
+                            <p class="hero-subhead hero-animate-subhead">
+                                Clinical-grade deep learning decision support for automated diabetic retinopathy detection. Ingest digital fundus photography, evaluate microvascular biomarkers, and stratify risk across the 5-stage ICDR scale with dual transfer architectures.
+                            </p>
+
+                            <div class="hero-actions hero-animate-actions">
+                                <button type="button" class="btn btn-primary" data-nav-target="prediction">
+                                    <span>Analyze Retinal Image</span>
+                                    <span>→</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-nav-target="about">
+                                    <span>Explore How It Works</span>
+                                </button>
+                            </div>
+
+                            <div class="hero-trust-strip">
+                                <div class="trust-item">
+                                    <span class="trust-dot"></span>
+                                    <span>VGG16 (Web) • MobileNetV2 (Mobile)</span>
+                                </div>
+                                <div class="trust-item">
+                                    <span class="trust-dot"></span>
+                                    <span>Ben Graham Local Contrast</span>
+                                </div>
+                                <div class="trust-item">
+                                    <span class="trust-dot"></span>
+                                    <span>5-Stage ICDR Calibrated</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Spatial Liquid Glass Retinal Showcase with Floating Telemetry Cards -->
+                        <div class="hero-visual-showcase hero-animate-visual">
+                            <div class="showcase-glass-orb">
+                                <div class="showcase-ambient-ring float-orbital"></div>
+                                <div class="showcase-retina-frame">
+                                    <img src="assets/sample_images/sample_0_no_dr.png" alt="Clinical Retinal Fundus Scan" class="showcase-retina-img">
+                                    <div class="showcase-scan-beam"></div>
+                                </div>
+
+                                <!-- Floating Glass Card 1 (Top Left): Neural Architectures -->
+                                <div class="glass-float-card float-card-top-left float-slow">
+                                    <div class="float-card-icon">🧠</div>
+                                    <div class="float-card-info">
+                                        <div class="float-card-label">Neural Models</div>
+                                        <div class="float-card-val">VGG16 (Web) • MobileNetV2 (Mobile)</div>
+                                    </div>
+                                    <span class="pulse-dot" style="background:var(--accent-cyan);"></span>
+                                </div>
+
+                                <!-- Floating Glass Card 2 (Bottom Right): 5-Stage ICDR -->
+                                <div class="glass-float-card float-card-bottom-right float-delayed">
+                                    <div class="float-card-icon">👁️</div>
+                                    <div class="float-card-info">
+                                        <div class="float-card-label">Clinical Grading</div>
+                                        <div class="float-card-val">5-Stage ICDR Scale</div>
+                                    </div>
+                                    <span class="pulse-dot" style="background:var(--accent-emerald);"></span>
+                                </div>
+
+                                <!-- Floating Glass Card 3 (Bottom Left): Graham Filter -->
+                                <div class="glass-float-card float-card-bottom-left float-slow">
+                                    <div class="float-card-icon">⚡</div>
+                                    <div class="float-card-info">
+                                        <div class="float-card-label">Preprocessing</div>
+                                        <div class="float-card-val">Graham Local Contrast</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3 Feature Cards -->
+                    <div class="hero-features-grid hero-animate-cards">
+                        <div class="apple-card hero-feature-card card-hover-lift shimmer-hover">
+                            <div>
+                                <div class="apple-caption" style="color: var(--accent-blue); margin-bottom: 12px;">01 / DEEP VISION</div>
+                                <div class="apple-card-title">Retained Neural Architectures</div>
+                                <p class="apple-card-body">
+                                    Dual-platform architecture: <strong>VGG16</strong> powers high-capacity web screening (90.0% accuracy), while <strong>MobileNetV2</strong> is reserved for the Flutter Android mobile application.
+                                </p>
+                            </div>
+                            <div class="feature-footer-link" data-nav-target="performance">
+                                <span>Architecture Benchmarks</span>
+                                <span>→</span>
+                            </div>
+                        </div>
+
+                        <div class="apple-card hero-feature-card card-hover-lift shimmer-hover">
+                            <div>
+                                <div class="apple-caption" style="color: var(--accent-teal); margin-bottom: 12px;">02 / PREPROCESSING</div>
+                                <div class="apple-card-title">Graham Local Contrast</div>
+                                <p class="apple-card-body">
+                                    Eliminates illumination variance across heterogeneous clinic cameras via weighted Gaussian subtraction, isolating subtle microvascular lesion patterns.
+                                </p>
+                            </div>
+                            <div class="feature-footer-link" data-nav-target="prediction">
+                                <span>Inspect Standardization</span>
+                                <span>→</span>
+                            </div>
+                        </div>
+
+                        <div class="apple-card hero-feature-card card-hover-lift shimmer-hover">
+                            <div>
+                                <div class="apple-caption" style="color: var(--accent-emerald); margin-bottom: 12px;">03 / CLINICAL STANDARDS</div>
+                                <div class="apple-card-title">5-Stage ICDR Grading</div>
+                                <p class="apple-card-body">
+                                    Full probability calibration across all five stages of the International Clinical Diabetic Retinopathy severity scale, providing immediate risk stratification.
+                                </p>
+                            </div>
+                            <div class="feature-footer-link" data-nav-target="about">
+                                <span>Clinical Protocols</span>
+                                <span>→</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- =================================================================
+                 SECTION 2: CLINICAL SCREENING & PREDICTION (Automated Workflow)
+                 ================================================================= -->
+            <section id="view-prediction" class="view-section">
+                <div class="section-header">
+                    <div class="apple-caption" style="color: var(--accent-blue); margin-bottom: 8px;">CLINICAL DECISION SUPPORT</div>
+                    <h2 class="section-headline">Retinal Screening & Analysis</h2>
+                    <p class="section-subhead">
+                        Ingest digital color fundus photography and compute automated multi-model deep learning inference with ranked alternative perspectives.
+                    </p>
+                </div>
+
+                <div class="screening-grid">
+                    <!-- Left Column: Input Ingestion & Settings Panel -->
+                    <div class="screening-input-panel">
+                        <!-- Image Source Ingestion Card -->
+                        <div class="apple-card">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                                <div>
+                                    <div class="apple-caption" style="color: var(--accent-blue);">RETINAL IMAGING</div>
+                                    <div class="apple-card-title" style="margin-bottom: 0;">Fundus Photograph</div>
+                                </div>
+                                <div style="font-size: 0.78rem; color: var(--text-tertiary); font-family: var(--font-mono);">
+                                    224×224 RGB
+                                </div>
+                            </div>
+
+                            <!-- Ingest Method Segmented Switcher -->
+                            <div class="segmented-control" role="tablist">
+                                <button type="button" class="segmented-control-btn ingest-tab-btn active" data-method="sample" role="tab">
+                                    Reference Samples
+                                </button>
+                                <button type="button" class="segmented-control-btn ingest-tab-btn" data-method="custom" role="tab">
+                                    Custom Upload
+                                </button>
+                            </div>
+
+                            <!-- Method 1: Reference Samples -->
+                            <div id="sampleIngestSection">
+                                <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 10px;">
+                                    Select a clinical reference scan from the 5-point ICDR severity scale:
+                                </div>
+                                <div class="samples-grid" id="samplesGrid">
+                                    <!-- Rendered dynamically by upload.js -->
+                                </div>
+                            </div>
+
+                            <!-- Method 2: Custom File Upload -->
+                            <div id="customUploadSection" style="display: none;">
+                                <input type="file" id="retinalFileInput" class="file-input-hidden" accept=".png,.jpg,.jpeg,.bmp">
+                                <div class="upload-dropzone" id="uploadDropzone">
+                                    <div class="upload-icon">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="upload-title">Drop retinal fundus scan here</div>
+                                    <div class="upload-hint">or click to browse local files (PNG, JPG, BMP up to 15MB)</div>
+                                </div>
+                            </div>
+
+                            <!-- Plausibility Alert Banner -->
+                            <div class="plausibility-warning" id="plausibilityWarning" style="display: none;">
+                                <span style="font-size: 1.2rem;">⚠️</span>
+                                <span class="warning-text">Non-fundus image characteristics detected.</span>
+                            </div>
+
+                            <!-- New Analysis Reset Button -->
+                            <div style="margin-top: 16px;">
+                                <button type="button" class="btn btn-secondary btn-block btn-sm" id="btnNewAnalysis">
+                                    <span>🔄 Clear & Reset Scan</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Stage Inspection & Automated Analysis -->
+                    <div class="screening-stage-panel">
+                        <!-- Empty State (Shown when no image is selected) -->
+                        <div class="apple-card empty-state-card" id="screeningEmptyState">
+                            <div class="empty-state-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                                </svg>
+                            </div>
+                            <h3 style="font-size: 1.15rem; margin-bottom: 6px;">No Retinal Scan Loaded</h3>
+                            <p style="font-size: 0.88rem; color: var(--text-secondary); max-width: 380px;">
+                                Pick a verified reference sample or upload a color fundus image on the left to begin multi-model inference.
+                            </p>
+                        </div>
+
+                        <!-- Image Preview & Inspection Card -->
+                        <div class="apple-card preview-card" id="previewCard" style="display: none;">
+                            <div class="preview-header">
+                                <div>
+                                    <div class="apple-caption" style="color: var(--accent-blue);">RETINAL INSPECTION</div>
+                                    <div class="apple-card-title" style="margin-bottom: 0;">Precision Fundus Preview</div>
+                                </div>
+
+                                <!-- View Mode Selector -->
+                                <div class="segmented-control" style="margin-bottom: 0;">
+                                    <button type="button" class="segmented-control-btn inspect-mode-btn active" data-mode="side-by-side">
+                                        Side-by-Side
+                                    </button>
+                                    <button type="button" class="segmented-control-btn inspect-mode-btn" data-mode="original">
+                                        Original
+                                    </button>
+                                    <button type="button" class="segmented-control-btn inspect-mode-btn" data-mode="normalized">
+                                        Normalized
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Canvas Stage with Laser Scan Overlay during analysis -->
+                            <div class="preview-canvas-wrapper" id="previewCanvasWrapper">
+                                <div class="preview-display-container" id="previewDisplayContainer">
+                                    <!-- Rendered dynamically by upload.js -->
+                                </div>
+                            </div>
+
+                            <!-- Action Button: Analyze Retina -->
+                            <div class="action-strip">
+                                <button type="button" class="btn btn-primary btn-block" id="btnAnalyzeRetina">
+                                    <span>⚡ Analyze Retinal Scan (VGG16)</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Analysis Active Loading Banner -->
+                        <div class="loading-status-banner" id="analysisStatusBanner" style="display: none;">
+                            <span class="pulse-dot" style="background: var(--accent-blue); box-shadow: 0 0 10px var(--accent-blue);"></span>
+                            <span>Executing multi-model inference across retained deep learning architectures...</span>
+                        </div>
+
+                        <!-- Skeleton Card while waiting for backend -->
+                        <div class="apple-card" id="analysisSkeletonCard" style="display: none;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                                <div class="skeleton-loader" style="height: 24px; width: 140px;"></div>
+                                <div class="skeleton-loader" style="height: 24px; width: 180px;"></div>
+                            </div>
+                            <div class="skeleton-loader" style="height: 44px; width: 65%; margin-bottom: 22px;"></div>
+                            <div class="skeleton-loader" style="height: 8px; width: 100%; margin-bottom: 24px;"></div>
+                            <div class="skeleton-loader" style="height: 120px; width: 100%; margin-bottom: 18px;"></div>
+                        </div>
+
+                        <!-- Error State Card -->
+                        <div class="apple-card" id="analysisErrorCard" style="display: none; border-color: rgba(255, 69, 58, 0.4);">
+                            <div style="display: flex; align-items: flex-start; gap: 14px;">
+                                <span style="font-size: 1.6rem; color: var(--accent-red);">✕</span>
+                                <div>
+                                    <div class="apple-card-title" style="color: var(--accent-red); margin-bottom: 4px;">Analysis Anomaly</div>
+                                    <p class="apple-card-body" id="analysisErrorMessage" style="margin-bottom: 14px;">
+                                        Inference execution failed.
+                                    </p>
+                                    <button type="button" class="btn btn-secondary btn-sm" id="btnRetryAnalysis">
+                                        <span>Retry Analysis</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Primary Result Card (Generated when inference succeeds) -->
+                        <div class="apple-card result-card-champion" id="predictionResultStage" style="display: none;">
+                            <div class="result-card-header">
+                                <div>
+                                    <div class="champion-badge">
+                                        <span>★ Dedicated Web Model (VGG16)</span>
+                                    </div>
+                                    <div style="font-size: 0.82rem; color: var(--text-tertiary); margin-top: 6px;" id="primaryModelName">
+                                        VGG16 • Standard RGB (224×224)
+                                    </div>
+                                </div>
+                                <div class="provenance-pills">
+                                    <span class="meta-pill" id="primaryLatencyPill">Latency: 45 ms</span>
+                                    <span class="meta-pill" id="primaryArchPill">16-Layer Deep Transfer CNN</span>
+                                    <span class="meta-pill">APTOS 2019 Blindness Cohort</span>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Model Strip (Dedicated VGG16) -->
+                            <div class="model-switcher-strip" id="modelSwitcherStrip" style="display: none;"></div>
+
+                            <!-- Stage & Large Confidence Display -->
+                            <div class="stage-display">
+                                <div class="stage-title-wrap">
+                                    <div class="stage-number-badge" id="primaryStageBadge">Stage 0 • No DR</div>
+                                    <div class="stage-name-huge" id="primaryStageName">No Diabetic Retinopathy</div>
+                                </div>
+                                <div class="confidence-metric-block">
+                                    <div class="confidence-value-big" id="primaryConfidenceValue">88.5%</div>
+                                    <div class="confidence-label">Softmax Confidence</div>
+                                </div>
+                            </div>
+
+                            <!-- Animated Confidence Meter -->
+                            <div class="confidence-meter-container">
+                                <div class="confidence-meter-bar" id="primaryConfidenceBar"></div>
+                            </div>
+
+                            <!-- Low-Confidence Warning Banner -->
+                            <div class="low-confidence-alert" id="primaryLowConfAlert" style="display: none;">
+                                <span style="font-size: 1.25rem;">⚠️</span>
+                                <span class="low-conf-text">Model confidence is below threshold.</span>
+                            </div>
+
+                            <!-- Probability Distribution Across 5 Stages -->
+                            <div class="prob-dist-section">
+                                <div class="prob-dist-header">
+                                    <div class="prob-dist-title">Calibrated 5-Stage ICDR Probability Distribution</div>
+                                    <div style="font-size: 0.74rem; color: var(--text-tertiary);">Softmax Multi-Class</div>
+                                </div>
+                                <div id="primaryProbRowsContainer">
+                                    <!-- Rendered dynamically -->
+                                </div>
+                            </div>
+
+                            <!-- Clinical Memo & Referral Box -->
+                            <div class="clinical-memo-box">
+                                <div class="clinical-memo-title">Clinical Findings & Lesion Assessment</div>
+                                <div class="clinical-memo-text" id="primaryClinicalDesc">
+                                    No visible microvascular lesions detected.
+                                </div>
+                                <div class="referral-guidance">
+                                    <span style="color: var(--accent-blue);">ℹ Referral Protocol:</span>
+                                    <span id="primaryClinicalRec">Routine annual diabetic fundus screening.</span>
+                                </div>
+                            </div>
+
+                            <!-- Educational Disclaimer inside card -->
+                            <div style="font-size: 0.74rem; color: var(--text-tertiary); line-height: 1.4; border-top: 1px solid var(--border-subtle); padding-top: 12px;">
+                                Scientific Note: The highest confidence model is selected based on Softmax posterior probability on this specific photograph and does not imply superior held-out test accuracy.
+                            </div>
+                        </div>
+
+                        <!-- Alternative Perspectives Viewer (Directly beneath primary) -->
+                        <div id="alternativeViewerCard" style="display: none;">
+                            <!-- Rendered dynamically by prediction.js -->
+                        </div>
+
+                        <!-- Session Prediction History Table -->
+                        <div class="history-section apple-card" id="sessionHistorySection" style="display: none;">
+                            <div class="apple-caption" style="color: var(--accent-blue); margin-bottom: 8px;">SESSION AUDIT TELEMETRY</div>
+                            <div class="apple-card-title" style="font-size: 1.15rem; margin-bottom: 12px;">Recent Retinal Analyses</div>
+                            <div style="overflow-x: auto;">
+                                <table class="history-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Time</th>
+                                            <th>Input Source</th>
+                                            <th>Model</th>
+                                            <th>Predicted Severity</th>
+                                            <th>Confidence</th>
+                                            <th>Latency</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="historyTableBody">
+                                        <!-- Rendered dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- =================================================================
+                 SECTION 3: MODEL PERFORMANCE & BENCHMARKS
+                 ================================================================= -->
+            <section id="view-performance" class="view-section">
+                <div class="section-header">
+                    <div class="apple-caption" style="color: var(--accent-blue); margin-bottom: 8px;">VALIDATION TELEMETRY • VGG16 WEBSITE ENGINE</div>
+                    <h2 class="section-headline">Model Performance & Benchmarks</h2>
+                    <p class="section-subhead">
+                        Empirical diagnostic metrics for VGG16 (Website Screening Model), training convergence trajectory, and multi-platform architecture allocation.
+                    </p>
+                </div>
+
+                <!-- 4 Metric Cards (VGG16 Website Dedicated Model) -->
+                <div class="metrics-grid-4">
+                    <div class="apple-card metric-card card-hover-lift">
+                        <div class="apple-caption" style="color: var(--accent-blue);">TEST ACCURACY (VGG16)</div>
+                        <div class="metric-card-number" id="metricTestAccuracy" style="color: var(--accent-blue);">90.0%</div>
+                        <div class="metric-card-desc">Top-1 classification accuracy on held-out diabetic retinopathy test cohort</div>
+                    </div>
+
+                    <div class="apple-card metric-card card-hover-lift">
+                        <div class="apple-caption" style="color: var(--accent-teal);">MACRO PRECISION</div>
+                        <div class="metric-card-number" id="metricMacroPrecision" style="color: var(--accent-teal);">88.5%</div>
+                        <div class="metric-card-desc">Positive predictive value averaged across all 5 clinical stages</div>
+                    </div>
+
+                    <div class="apple-card metric-card card-hover-lift">
+                        <div class="apple-caption" style="color: var(--accent-emerald);">MACRO RECALL</div>
+                        <div class="metric-card-number" id="metricMacroRecall" style="color: var(--accent-emerald);">90.0%</div>
+                        <div class="metric-card-desc">Sensitivity across microvascular lesion severity stages</div>
+                    </div>
+
+                    <div class="apple-card metric-card card-hover-lift">
+                        <div class="apple-caption" style="color: var(--accent-amber);">MACRO F1 SCORE</div>
+                        <div class="metric-card-number" id="metricMacroF1" style="color: var(--accent-amber);">89.2%</div>
+                        <div class="metric-card-desc">Harmonic mean of precision and recall mitigating class imbalance</div>
+                    </div>
+                </div>
+
+                <!-- Visualizations: Training Dynamics & Confusion Matrix -->
+                <div class="performance-charts-grid">
+                    <!-- Training Dynamics Chart (Chart.js / Canvas) -->
+                    <div class="apple-card chart-card-wrapper card-hover-lift">
+                        <div>
+                            <div class="apple-caption" style="color: var(--accent-blue);">TRAINING CONVERGENCE</div>
+                            <div class="apple-card-title">Accuracy & Loss Trajectory</div>
+                            <p class="apple-card-body" style="font-size: 0.84rem;">
+                                Cross-entropy loss and top-1 accuracy curves across fine-tuning epochs from <code>training_history.json</code>.
+                            </p>
+                        </div>
+                        <div class="chart-canvas-container">
+                            <canvas id="trainingDynamicsCanvas"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Confusion Matrix Display -->
+                    <div class="apple-card chart-card-wrapper card-hover-lift">
+                        <div>
+                            <div class="apple-caption" style="color: var(--accent-teal);">DISCRIMINATION MATRIX</div>
+                            <div class="apple-card-title">Normalized Confusion Matrix</div>
+                            <p class="apple-card-body" style="font-size: 0.84rem;">
+                                Observed clinical ground truth vs. predicted classification frequencies.
+                            </p>
+                        </div>
+                        <div class="chart-image-container">
+                            <img src="assets/results/confusion_matrix.png" alt="Normalized Confusion Matrix" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-Class ROC Curves -->
+                <div class="apple-card card-hover-lift" style="margin-bottom: var(--space-8);">
+                    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <div class="apple-caption" style="color: var(--accent-blue);">RECEIVER OPERATING CHARACTERISTIC</div>
+                            <div class="apple-card-title">Multi-Class ROC-AUC Trajectory</div>
+                            <p class="apple-card-body" style="font-size: 0.84rem;">
+                                True positive rate vs. false positive rate across decision thresholds on the held-out test cohort.
+                            </p>
+                        </div>
+                        <div>
+                            <span class="meta-pill" style="color: var(--accent-emerald); border-color: rgba(48,209,88,0.3); background: rgba(48,209,88,0.1);">
+                                Macro ROC-AUC: 1.0000
+                            </span>
+                        </div>
+                    </div>
+                    <div class="chart-image-container" style="max-height: 380px;">
+                        <img src="assets/results/roc_curves.png" alt="Multi-Class ROC Curves" loading="lazy" style="max-height: 360px;" />
+                    </div>
+                </div>
+
+                <!-- Deep Learning Architecture Benchmark Table (VGG16 for Web & MobileNetV2 for Mobile) -->
+                <div class="apple-card card-hover-lift" id="benchmarkSection">
+                    <div class="apple-caption" style="color: var(--accent-blue);">OFFLINE BENCHMARKS & ARCHITECTURE ROLES</div>
+                    <div class="apple-card-title">Retained Neural Architecture Comparison</div>
+                    <p class="apple-card-body">
+                        Authentic empirical metrics for the two active production models: <strong>VGG16</strong> (Dedicated Website Engine) and <strong>MobileNetV2</strong> (Dedicated Flutter Mobile App Engine).
+                    </p>
+
+                    <div class="benchmark-table-wrapper">
+                        <table class="benchmark-table">
+                            <thead>
+                                <tr>
+                                    <th>Model Architecture</th>
+                                    <th>Test Accuracy</th>
+                                    <th>Precision</th>
+                                    <th>Recall</th>
+                                    <th>F1 Score</th>
+                                    <th>ROC-AUC</th>
+                                    <th>Train Time</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="benchmarkTableBody">
+                                <!-- Rendered dynamically by performance.js -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top: 24px;">
+                        <div class="apple-caption" style="color: var(--accent-teal); margin-bottom: 8px;">PER-CLASS SENSITIVITY BREAKDOWN</div>
+                        <div style="overflow-x: auto;">
+                            <table class="benchmark-table" style="font-size: 0.84rem;">
+                                <thead>
+                                    <tr>
+                                        <th>Disease Grade</th>
+                                        <th>Precision</th>
+                                        <th>Recall</th>
+                                        <th>F1-Score</th>
+                                        <th>Test Support</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="classificationReportBody">
+                                    <!-- Populated by performance.js -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 0.76rem; color: var(--text-tertiary); margin-top: 14px;">
+                        Scientific Integrity: All metrics are derived from verified empirical evaluations saved in <code>results/model_comparison.json</code> and <code>results/metrics.json</code>.
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- =================================================================
+                 SECTION 4: ABOUT ARCHITECTURE & CLINICAL ETHICS
+                 ================================================================= -->
+            <section id="view-about" class="view-section">
+                <div class="section-header">
+                    <div class="apple-caption" style="color: var(--accent-blue); margin-bottom: 8px;">RESEARCH ARCHITECTURE</div>
+                    <h2 class="section-headline">About RetinaCare AI</h2>
+                    <p class="section-subhead">
+                        A deep learning decision support framework engineered for high-throughput preliminary screening of diabetic microvascular eye disease.
+                    </p>
+                </div>
+
+                <!-- 4 Symmetrical Apple Cards -->
+                <div class="about-grid-4">
+                    <div class="apple-card about-card card-hover-lift">
+                        <div>
+                            <div class="apple-caption" style="color: var(--accent-blue); margin-bottom: 8px;">EPIDEMIOLOGY</div>
+                            <div class="apple-card-title">Problem Statement</div>
+                            <p class="apple-card-body">
+                                Diabetic Retinopathy (DR) is the primary driver of preventable blindness among working-age adults globally. In its early microvascular stages, diabetic retinopathy progresses asymptomatically. Over 90% of severe vision loss cases can be prevented with regular, automated fundus screening and timely clinical referral.
+                            </p>
+                        </div>
+                        <div style="margin-top: 20px; font-size: 0.82rem; font-weight: 600; color: var(--accent-blue);">
+                            Global Public Health Challenge
+                        </div>
+                    </div>
+
+                    <div class="apple-card about-card card-hover-lift">
+                        <div>
+                            <div class="apple-caption" style="color: var(--accent-teal); margin-bottom: 8px;">ENGINEERING PIPELINE</div>
+                            <div class="apple-card-title">End-to-End Clinical Workflow</div>
+                            <div class="apple-card-body" style="line-height: 1.65;">
+                                <strong>1. Ingestion:</strong> Standard RGB fundus photograph acquisition.<br>
+                                <strong>2. Masking:</strong> Circular aperture cropping to isolate retinal field.<br>
+                                <strong>3. Normalization:</strong> Ben Graham weighted Gaussian subtraction.<br>
+                                <strong>4. Extraction:</strong> Deep convolutional transfer representations.<br>
+                                <strong>5. Assessment:</strong> Calibrated 5-stage ICDR clinical classification.
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; font-size: 0.82rem; font-weight: 600; color: var(--accent-teal);">
+                            Standardized Processing Pipeline
+                        </div>
+                    </div>
+
+                    <div class="apple-card about-card card-hover-lift">
+                        <div>
+                            <div class="apple-caption" style="color: var(--accent-emerald); margin-bottom: 8px;">OBJECTIVES</div>
+                            <div class="apple-card-title">System Objectives</div>
+                            <div class="apple-card-body" style="line-height: 1.65;">
+                                • Eliminate illumination variance across heterogeneous clinic cameras.<br>
+                                • Address clinical class imbalance via balanced focal and cross-entropy weighting.<br>
+                                • Provide transparent probability distributions for all 5 disease stages.<br>
+                                • Guarantee complete privacy with strict in-memory execution.
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; font-size: 0.82rem; font-weight: 600; color: var(--accent-emerald);">
+                            Academic Engineering Milestones
+                        </div>
+                    </div>
+
+                    <div class="apple-card about-card card-hover-lift">
+                        <div>
+                            <div class="apple-caption" style="color: var(--accent-amber); margin-bottom: 8px;">DATASET & ETHICS</div>
+                            <div class="apple-card-title">Dataset & Clinical Ethics</div>
+                            <p class="apple-card-body">
+                                Trained and evaluated on the <strong>APTOS 2019 Blindness Detection</strong> cohort, comprising expert-adjudicated digital color fundus images categorized across the 5-point ICDR severity scale. All retinal processing occurs in volatile memory without permanent storage of patient biometric imagery.
+                            </p>
+                        </div>
+                        <div style="margin-top: 20px; font-size: 0.82rem; font-weight: 600; color: var(--accent-amber);">
+                            Privacy-First Ophthalmic Design
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical Disclaimer Banner -->
+                <div class="disclaimer-banner">
+                    <div class="disclaimer-icon">⚖</div>
+                    <div>
+                        <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Institutional Medical Disclaimer</strong>
+                        RetinaCare AI is an educational screening aid and clinical decision-support research prototype. It does NOT provide definitive medical diagnoses, prescriptions, or clinical treatment plans. All screening findings must be verified through a dilated comprehensive eye examination performed by a licensed ophthalmologist or optometrist.
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- =================================================================
+                 SECTION 5: CONTACT & CLINICAL COLLABORATION
+                 ================================================================= -->
+            <section id="view-contact" class="view-section">
+                <div class="section-header">
+                    <div class="apple-caption" style="color: var(--accent-blue); margin-bottom: 8px;">RESEARCH CORRESPONDENCE & COLLABORATION</div>
+                    <h2 class="section-headline">Contact RetinaCare AI Team</h2>
+                    <p class="section-subhead">
+                        Connect with the research team, clinical advisors, and project authors at the Department of Computer Science & Engineering, GM University.
+                    </p>
+                </div>
+
+                <!-- Contact & Collaboration Cards Grid -->
+                <div class="contact-grid">
+                    <div class="apple-card contact-card card-hover-lift">
+                        <div class="contact-card-icon" style="background: rgba(79, 140, 255, 0.15); color: var(--accent-blue);">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                            </svg>
+                        </div>
+                        <div class="apple-caption" style="color: var(--accent-blue); margin-bottom: 6px;">ACADEMIC INSTITUTION</div>
+                        <div class="apple-card-title">Department of CSE</div>
+                        <p class="apple-card-body">
+                            GM University, Post Box No. 4, Davanagere - 577006, Karnataka, India.<br>
+                            Specialization in Deep Learning, Medical Imaging, and AI Decision Support.
+                        </p>
+                        <div class="contact-card-meta">
+                            <span>Campus Research Lab 402</span>
+                        </div>
+                    </div>
+
+                    <div class="apple-card contact-card card-hover-lift">
+                        <div class="contact-card-icon" style="background: rgba(120, 220, 232, 0.15); color: var(--accent-teal);">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                            </svg>
+                        </div>
+                        <div class="apple-caption" style="color: var(--accent-teal); margin-bottom: 6px;">DIRECT CORRESPONDENCE</div>
+                        <div class="apple-card-title">Research & Technical Inquiries</div>
+                        <p class="apple-card-body">
+                            For technical discussions regarding VGG16/MobileNetV2 transfer weights, Graham illumination normalization, or validation benchmarks.
+                        </p>
+                        <div class="contact-card-meta">
+                            <a href="mailto:cse.pbl.retinacare@gmail.com" class="contact-link">cse.pbl.retinacare@gmail.com ↗</a>
+                        </div>
+                    </div>
+
+                    <div class="apple-card contact-card card-hover-lift">
+                        <div class="contact-card-icon" style="background: rgba(48, 209, 88, 0.15); color: var(--accent-emerald);">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="apple-caption" style="color: var(--accent-emerald); margin-bottom: 6px;">CLINICAL COLLABORATION</div>
+                        <div class="apple-card-title">Ophthalmic Specialists</div>
+                        <p class="apple-card-body">
+                            Welcoming partnerships with ophthalmologists, diabetic clinics, and retinal screening programs to evaluate external clinical cohort generalization.
+                        </p>
+                        <div class="contact-card-meta">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('chatbotTriggerBtn').click();">
+                                💬 Launch Clinical Assistant
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Compliance Note -->
+                <div class="disclaimer-banner" style="margin-top: 32px;">
+                    <div class="disclaimer-icon">🏛</div>
+                    <div>
+                        <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Project-Based Learning (PBL) Academic Prototype</strong>
+                        RetinaCare AI was conceived and implemented as a capstone Project-Based Learning curriculum project under the Department of Computer Science & Engineering, GM University.
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- =========================================================================
+         3. Floating RetinaCare AI Assistant (Chatbot in Bottom-Right)
+         ========================================================================= -->
+    <!-- Floating Circular Trigger Button -->
+    <button type="button" class="chatbot-trigger-btn" id="chatbotTriggerBtn" aria-label="Open RetinaCare AI Assistant" title="RetinaCare AI Assistant">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+        </svg>
+        <span class="chatbot-notification-dot"></span>
+    </button>
+
+    <!-- Chatbot Floating Window -->
+    <div class="chatbot-window" id="chatbotWindow" role="dialog" aria-modal="true" aria-labelledby="chatTitle">
+        <!-- Header -->
+        <div class="chat-header">
+            <div class="chat-header-title">
+                <div class="chat-avatar">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="chat-title-text" id="chatTitle">RetinaCare Assistant</div>
+                    <div class="chat-subtitle-text">Clinical Decision Support AI</div>
+                </div>
+            </div>
+            <button type="button" class="chat-close-btn" id="chatCloseBtn" aria-label="Close Assistant">
+                ✕
+            </button>
+        </div>
+
+        <!-- Persistent Educational Disclaimer Pill -->
+        <div class="chat-disclaimer-pill">
+            Educational decision aid • Does not replace ophthalmologist diagnosis
+        </div>
+
+        <!-- Message History -->
+        <div class="chat-messages-container" id="chatMessagesContainer">
+            <!-- Messages appended dynamically -->
+        </div>
+
+        <!-- Suggested Question Chips -->
+        <div class="chat-chips-container" id="chatChipsContainer">
+            <button type="button" class="chat-chip" id="chipCurrentResult" style="display: none;">
+                Explain my current scan
+            </button>
+            <button type="button" class="chat-chip" data-query="What are the 5 ICDR Diabetic Retinopathy stages?">
+                5 ICDR Stages
+            </button>
+            <button type="button" class="chat-chip" data-query="What is Ben Graham preprocessing?">
+                Graham Preprocessing
+            </button>
+            <button type="button" class="chat-chip" data-query="Compare VGG16 vs MobileNetV2">
+                VGG16 vs MobileNetV2
+            </button>
+            <button type="button" class="chat-chip" data-query="When should a patient see an ophthalmologist?">
+                Referral Protocol
+            </button>
+        </div>
+
+        <!-- Input Bar -->
+        <div class="chat-input-bar">
+            <input type="text" id="chatInputField" class="chat-input" placeholder="Ask about retinal stages, confidence, or lesions..." aria-label="Message to RetinaCare Assistant">
+            <button type="button" id="chatSendBtn" class="chat-send-btn" aria-label="Send Message" title="Send">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- =========================================================================
+         5. Apple Liquid Glass Settings Modal Dialog
+         ========================================================================= -->
+    <div class="settings-modal-backdrop" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" style="display: none;">
+        <div class="settings-modal-sheet">
+            <div class="settings-header">
+                <div class="settings-header-title">
+                    <div class="settings-icon-badge">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 id="settingsTitle" class="settings-headline">RetinaCare AI Preferences</h3>
+                        <p class="settings-subheadline">Clinical interface & spatial telemetry configuration</p>
+                    </div>
+                </div>
+                <button type="button" class="settings-close-btn" id="settingsCloseBtn" aria-label="Close Settings">✕</button>
+            </div>
+
+            <div class="settings-body">
+                <!-- Group 1: Appearance & Theme -->
+                <div class="settings-group">
+                    <div class="settings-group-label">APPEARANCE & THEME</div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="settings-item-title">Interface Color Mode</div>
+                            <div class="settings-item-desc">Select Apple Light Liquid Glass or Midnight Spatial Theme</div>
+                        </div>
+                        <div class="settings-segmented-pills">
+                            <button type="button" class="settings-pill-btn" data-setting-theme="light">
+                                ☀️ Light
+                            </button>
+                            <button type="button" class="settings-pill-btn" data-setting-theme="dark">
+                                🌙 Dark
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 2: Magnetic Dock Interactions -->
+                <div class="settings-group">
+                    <div class="settings-group-label">MAGNETIC DOCK BEHAVIOR</div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="settings-item-title">Cursor Magnification Intensity</div>
+                            <div class="settings-item-desc">Control macOS-style proximity scaling and magnetic pull</div>
+                        </div>
+                        <div class="settings-segmented-pills">
+                            <button type="button" class="settings-pill-btn" data-dock-intensity="subtle">
+                                Subtle
+                            </button>
+                            <button type="button" class="settings-pill-btn active" data-dock-intensity="standard">
+                                Standard
+                            </button>
+                            <button type="button" class="settings-pill-btn" data-dock-intensity="enhanced">
+                                Enhanced
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 3: Clinical Screening Telemetry -->
+                <div class="settings-group">
+                    <div class="settings-group-label">CLINICAL INFERENCE ENGINE</div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="settings-item-title">Active Web Engine</div>
+                            <div class="settings-item-desc">Dedicated 16-layer high-capacity convolutional network</div>
+                        </div>
+                        <span class="meta-pill" style="color: var(--accent-blue); background: rgba(79,140,255,0.12); border-color: rgba(79,140,255,0.3);">
+                            VGG16 (Active)
+                        </span>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="settings-item-title">Active Mobile Engine</div>
+                            <div class="settings-item-desc">Lightweight inverted residual architecture (Flutter App)</div>
+                        </div>
+                        <span class="meta-pill" style="color: var(--accent-emerald); background: rgba(48,209,88,0.12); border-color: rgba(48,209,88,0.3);">
+                            MobileNetV2 (Reserved)
+                        </span>
+                    </div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="settings-item-title">Confidence Alert Cutoff</div>
+                            <div class="settings-item-desc">Warns clinicians when top prediction confidence is below 70%</div>
+                        </div>
+                        <span class="meta-pill" style="color: var(--accent-amber); background: rgba(255,159,10,0.12); border-color: rgba(255,159,10,0.3);">
+                            70% Threshold
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Group 4: Server Health -->
+                <div class="settings-group">
+                    <div class="settings-group-label">BACKEND CONNECTIVITY</div>
+                    <div class="settings-row">
+                        <div>
+                            <div class="settings-item-title">FastAPI Microservice</div>
+                            <div class="settings-item-desc">Local inference host at <code>http://127.0.0.1:8000</code></div>
+                        </div>
+                        <span class="meta-pill" style="color: var(--accent-emerald); background: rgba(48,209,88,0.12); border-color: rgba(48,209,88,0.3);">
+                            ● Online (5 Models Loaded)
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-footer">
+                <span style="font-size: 0.76rem; color: var(--text-tertiary);">RetinaCare AI • System Preferences • Press Esc to close</span>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('settingsCloseBtn').click();">
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========================================================================
+         4. Apple Healthcare Minimal Footer
+         ========================================================================= -->
+    <footer class="apple-footer">
+        <div class="container">
+            <div class="footer-disclaimer">
+                <strong>Medical & Clinical Ethics Notice:</strong> RetinaCare AI is a machine-learning research platform engineered for automated triage and preliminary screening of diabetic microvascular abnormalities. It does not provide medical treatment or replace clinical evaluation. All retinal imaging assessments must be verified by a board-certified ophthalmologist.
+            </div>
+            <div class="footer-bottom-row">
+                <div>
+                    Department of Computer Science & Engineering • GM University
+                </div>
+                <div>
+                    RetinaCare AI v1.0.0 • Production Frontend (Vanilla JS & Modern CSS3)
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notifications Hub -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <!-- Main Application Entry Module -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

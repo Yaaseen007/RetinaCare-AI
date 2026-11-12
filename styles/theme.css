@@ -1,0 +1,786 @@
+/* ==============================================================================
+   RetinaCare AI - Apple Design System Theme
+   Engineered to recreate Apple macOS / iOS / iPadOS spatial design & materials
+   ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* -------------------------------------------------------------------------
+       Spatial Spacing Scale (4px / 8px system)
+       ------------------------------------------------------------------------- */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    --space-24: 96px;
+    --space-32: 128px;
+
+    /* Content Max Width (Apple Standard) */
+    --content-max-width: 1240px;
+
+    /* Border Radii */
+    --radius-xs: 8px;
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 22px;
+    --radius-xl: 30px;
+    --radius-pill: 9999px;
+
+    /* Motion Curves */
+    --ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
+    --ease-spring: cubic-bezier(0.34, 1.35, 0.64, 1);
+
+    /* Durations */
+    --duration-fast: 160ms;
+    --duration-btn: 200ms;
+    --duration-card: 260ms;
+    --duration-page: 380ms;
+    --duration-reveal: 600ms;
+}
+
+/* =============================================================================
+   DARK MODE PALETTE (Default Apple Pro Dark)
+   ============================================================================= */
+body[data-theme="dark"],
+.dark-theme,
+:root {
+    --bg-canvas: #000000;
+    --bg-subtle: #0B0B0F;
+    --surface-card: rgba(255, 255, 255, 0.05);
+    --surface-card-hover: rgba(255, 255, 255, 0.08);
+    --surface-card-active: rgba(255, 255, 255, 0.04);
+    --surface-elevated: rgba(28, 28, 30, 0.75);
+    --surface-glass: rgba(18, 18, 22, 0.72);
+    --surface-input: rgba(255, 255, 255, 0.06);
+
+    --border-hairline: rgba(255, 255, 255, 0.10);
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(255, 255, 255, 0.22);
+    --border-focus: rgba(10, 132, 255, 0.6);
+
+    --text-primary: #F5F5F7;
+    --text-secondary: #86868B;
+    --text-tertiary: #6E6E73;
+    --text-quaternary: #48484A;
+
+    /* Restrained Apple Healthcare Palette */
+    --accent-blue: #0A84FF;
+    --accent-blue-subtle: rgba(10, 132, 255, 0.12);
+    --accent-blue-border: rgba(10, 132, 255, 0.32);
+    
+    --accent-emerald: #30D158;
+    --accent-emerald-subtle: rgba(48, 209, 88, 0.12);
+    
+    --accent-amber: #FF9F0A;
+    --accent-amber-subtle: rgba(255, 159, 10, 0.12);
+    
+    --accent-orange: #FF851B;
+    --accent-orange-subtle: rgba(255, 133, 27, 0.12);
+    
+    --accent-red: #FF453A;
+    --accent-red-subtle: rgba(255, 69, 58, 0.12);
+
+    --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.45);
+    --shadow-card-hover: 0 12px 36px -4px rgba(0, 0, 0, 0.6), 0 0 20px rgba(10, 132, 255, 0.12);
+    --shadow-nav: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --shadow-drop: 0 18px 48px -12px rgba(0, 0, 0, 0.65);
+    
+    --glass-blur: blur(24px) saturate(180%);
+    --webkit-glass-blur: blur(24px) saturate(180%);
+}
+
+/* =============================================================================
+   LIGHT MODE PALETTE (Apple Clean Silver / White)
+   ============================================================================= */
+body[data-theme="light"],
+.light-theme {
+    --bg-canvas: #F5F5F7;
+    --bg-subtle: #FFFFFF;
+    --surface-card: #FFFFFF;
+    --surface-card-hover: #FFFFFF;
+    --surface-card-active: #F2F2F7;
+    --surface-elevated: rgba(255, 255, 255, 0.92);
+    --surface-glass: rgba(255, 255, 255, 0.82);
+    --surface-input: #FFFFFF;
+
+    --border-hairline: rgba(0, 0, 0, 0.08);
+    --border-subtle: rgba(0, 0, 0, 0.04);
+    --border-hover: rgba(0, 0, 0, 0.18);
+    --border-focus: rgba(0, 113, 227, 0.6);
+
+    --text-primary: #1D1D1F;
+    --text-secondary: #6E6E73;
+    --text-tertiary: #86868B;
+    --text-quaternary: #AEAEB2;
+
+    --accent-blue: #0071E3;
+    --accent-blue-subtle: rgba(0, 113, 227, 0.08);
+    --accent-blue-border: rgba(0, 113, 227, 0.28);
+    
+    --accent-emerald: #28CD41;
+    --accent-emerald-subtle: rgba(40, 205, 65, 0.1);
+    
+    --accent-amber: #FF9500;
+    --accent-amber-subtle: rgba(255, 149, 0, 0.1);
+    
+    --accent-orange: #FF7A00;
+    --accent-orange-subtle: rgba(255, 122, 0, 0.1);
+    
+    --accent-red: #FF3B30;
+    --accent-red-subtle: rgba(255, 59, 48, 0.1);
+
+    --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    --shadow-card-hover: 0 14px 32px -4px rgba(0, 0, 0, 0.09);
+    --shadow-nav: 0 8px 24px -8px rgba(0, 0, 0, 0.07);
+    --shadow-drop: 0 16px 40px -10px rgba(0, 0, 0, 0.12);
+    
+    --glass-blur: blur(20px) saturate(160%);
+    --webkit-glass-blur: blur(20px) saturate(160%);
+}
+
+/* =============================================================================
+   BASE RESETS & TYPOGRAPHY
+   ============================================================================= */
+html, body, [class*="css"], .stApp {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Plus Jakarta Sans", "Inter", sans-serif !important;
+    background-color: var(--bg-canvas) !important;
+    color: var(--text-primary) !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    letter-spacing: -0.012em;
+    margin: 0;
+    padding: 0;
+}
+
+/* Streamlit Header & Chrome Clean-up */
+header[data-testid="stHeader"] {
+    background-color: transparent !important;
+    height: 0 !important;
+    display: none !important;
+}
+div[data-testid="stToolbar"] {
+    display: none !important;
+}
+footer {
+    display: none !important;
+}
+
+/* Main Container Framing & Max Width */
+.main .block-container {
+    max-width: var(--content-max-width) !important;
+    padding-top: var(--space-4) !important;
+    padding-bottom: var(--space-16) !important;
+    padding-left: var(--space-6) !important;
+    padding-right: var(--space-6) !important;
+    margin: 0 auto !important;
+}
+
+@media (max-width: 768px) {
+    .main .block-container {
+        padding-left: var(--space-4) !important;
+        padding-right: var(--space-4) !important;
+    }
+}
+
+/* =============================================================================
+   APPLE TYPOGRAPHY SYSTEM
+   ============================================================================= */
+.apple-hero-headline {
+    font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-4) 0;
+    text-align: center !important;
+}
+
+.apple-hero-subhead {
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: -0.015em;
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin: 0 auto var(--space-8) auto !important;
+    text-align: center !important;
+    text-align-last: center !important;
+    display: block !important;
+}
+
+.apple-section-headline {
+    font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-2) 0;
+    text-align: center !important;
+}
+
+.apple-section-subhead {
+    font-size: 1.0rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto var(--space-8) auto !important;
+    text-align: center !important;
+    text-align-last: center !important;
+    display: block !important;
+}
+
+.apple-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-2) 0;
+}
+
+.apple-card-body,
+p.apple-card-body,
+.apple-card p,
+.apple-text-justify,
+.apple-justified-text,
+.apple-disclaimer-text {
+    text-align: justify !important;
+    text-justify: inter-word !important;
+    text-align-last: left;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+.apple-card-body {
+    font-size: 0.94rem;
+    line-height: 1.58;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.apple-caption {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+.apple-gradient-text {
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* =============================================================================
+   APPLE CARDS & SURFACES
+   ============================================================================= */
+.apple-card {
+    background: var(--surface-card);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--webkit-glass-blur);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-card);
+    transition: transform var(--duration-card) var(--ease-apple),
+                box-shadow var(--duration-card) var(--ease-apple),
+                border-color var(--duration-fast) var(--ease-apple);
+    position: relative;
+    overflow: hidden;
+}
+
+.apple-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--border-hover);
+}
+
+.apple-card:active {
+    transform: translateY(1px) scale(0.995);
+}
+
+/* Native Streamlit Bordered Container Styling */
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    background: var(--surface-card) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--webkit-glass-blur) !important;
+    border: 1px solid var(--border-hairline) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: var(--space-6) !important;
+    box-shadow: var(--shadow-card) !important;
+    transition: transform var(--duration-card) var(--ease-apple),
+                box-shadow var(--duration-card) var(--ease-apple),
+                border-color var(--duration-fast) var(--ease-apple) !important;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"]:hover {
+    border-color: var(--border-hover) !important;
+}
+
+/* Equal Column Alignment */
+div[data-testid="column"] {
+    display: flex !important;
+    flex-direction: column !important;
+}
+div[data-testid="column"] > div[data-testid="stVerticalBlock"] {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+}
+
+/* =============================================================================
+   BUTTON PHYSICS & CONTROLS
+   ============================================================================= */
+div.stButton > button {
+    border-radius: var(--radius-pill) !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    padding: 10px 24px !important;
+    letter-spacing: -0.01em !important;
+    cursor: pointer !important;
+    transition: transform var(--duration-btn) var(--ease-apple),
+                box-shadow var(--duration-btn) var(--ease-apple),
+                background-color var(--duration-fast) ease,
+                border-color var(--duration-fast) ease !important;
+    will-change: transform !important;
+    border: 1px solid transparent !important;
+}
+
+div.stButton > button:hover {
+    transform: scale(1.02) !important;
+}
+
+div.stButton > button:active {
+    transform: scale(0.97) !important;
+    transition-duration: 80ms !important;
+}
+
+/* Primary Button (Apple System Blue) */
+div.stButton > button[kind="primary"] {
+    background-color: var(--accent-blue) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(10, 132, 255, 0.35) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+div.stButton > button[kind="primary"]:hover {
+    box-shadow: 0 6px 20px rgba(10, 132, 255, 0.5) !important;
+}
+
+/* Secondary Button (Frosted Pill) */
+div.stButton > button[kind="secondary"] {
+    background: var(--surface-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-hairline) !important;
+    backdrop-filter: var(--glass-blur) !important;
+}
+
+div.stButton > button[kind="secondary"]:hover {
+    background: var(--surface-card-hover) !important;
+    border-color: var(--border-hover) !important;
+}
+
+/* =============================================================================
+   FLOATING SEGMENTED NAVIGATION BAR
+   ============================================================================= */
+.apple-nav-container {
+    position: sticky;
+    top: var(--space-3);
+    z-index: 1000;
+    margin-bottom: var(--space-8);
+}
+
+.apple-nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface-glass);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--webkit-glass-blur);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px 6px 20px;
+    box-shadow: var(--shadow-nav);
+    transition: all var(--duration-card) var(--ease-apple);
+}
+
+.apple-nav-brand-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+    user-select: none;
+}
+
+.apple-nav-brand-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+}
+
+.apple-nav-pill-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    background: var(--accent-blue-subtle);
+    color: var(--accent-blue);
+    border: 1px solid var(--accent-blue-border);
+}
+
+/* Segmented Switcher Radio Override (No Radio Dots) */
+div[data-testid="stRadio"] {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0 !important;
+}
+
+div[data-testid="stRadio"] > div {
+    justify-content: center !important;
+}
+
+div[data-testid="stRadio"] div[role="radiogroup"] {
+    display: inline-flex !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--webkit-glass-blur) !important;
+    border: 1px solid var(--border-hairline) !important;
+    border-radius: var(--radius-pill) !important;
+    padding: 4px !important;
+    gap: 2px !important;
+}
+
+div[data-testid="stRadio"] div[role="radiogroup"] label {
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: var(--radius-pill) !important;
+    padding: 6px 18px !important;
+    cursor: pointer !important;
+    margin: 0 !important;
+    transition: all var(--duration-fast) var(--ease-apple) !important;
+}
+
+/* Hide native radio circle indicator */
+div[data-testid="stRadio"] div[role="radiogroup"] label > div:first-child {
+    display: none !important;
+}
+
+/* Active Segmented Pill */
+div[data-testid="stRadio"] div[role="radiogroup"] label[data-checked="true"],
+div[data-testid="stRadio"] div[role="radiogroup"] label:has(input:checked) {
+    background: var(--surface-card-hover) !important;
+    border: 1px solid var(--border-hairline) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+div[data-testid="stRadio"] div[role="radiogroup"] label:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+}
+
+div[data-testid="stRadio"] div[role="radiogroup"] label p {
+    font-size: 0.88rem !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.01em !important;
+    color: var(--text-primary) !important;
+    margin: 0 !important;
+}
+
+/* =============================================================================
+   IMAGE STAGE & RETINAL DROP ZONE
+   ============================================================================= */
+.apple-dropzone-frame {
+    background: var(--surface-card);
+    border: 1.5px dashed var(--border-hairline);
+    border-radius: var(--radius-lg);
+    padding: var(--space-10) var(--space-6);
+    text-align: center;
+    transition: all var(--duration-card) var(--ease-apple);
+    cursor: pointer;
+    position: relative;
+}
+
+.apple-dropzone-frame:hover {
+    border-color: var(--accent-blue);
+    background: var(--surface-card-hover);
+    transform: translateY(-2px);
+}
+
+.apple-dropzone-icon {
+    font-size: 2.4rem;
+    margin-bottom: var(--space-3);
+    transition: transform var(--duration-card) var(--ease-apple);
+    display: inline-block;
+}
+
+.apple-dropzone-frame:hover .apple-dropzone-icon {
+    transform: translateY(-3px);
+}
+
+/* Retinal Image Stage (Dark Cinema Frame) */
+.retinal-cinema-stage {
+    background: #000000;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-hairline);
+    padding: var(--space-4);
+    box-shadow: inset 0 2px 14px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* =============================================================================
+   APPLE PREMIUM SELECTBOX & DROPDOWN OVERRIDES
+   ============================================================================= */
+div[data-testid="stSelectbox"] > div {
+    border-radius: var(--radius-pill) !important;
+}
+
+div[data-testid="stSelectbox"] div[data-baseweb="select"] > div {
+    background: var(--surface-card) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--webkit-glass-blur) !important;
+    border: 1px solid var(--border-hairline) !important;
+    border-radius: var(--radius-pill) !important;
+    padding: 4px 14px !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+    transition: all var(--duration-fast) var(--ease-apple) !important;
+    cursor: pointer !important;
+}
+
+div[data-testid="stSelectbox"] div[data-baseweb="select"] > div:hover {
+    border-color: var(--border-hover) !important;
+    background: var(--surface-card-hover) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+}
+
+div[data-testid="stSelectbox"] div[data-baseweb="select"]:focus-within > div {
+    border-color: var(--accent-blue) !important;
+    box-shadow: 0 0 0 3px var(--accent-blue-subtle) !important;
+}
+
+div[data-baseweb="popover"] ul[role="listbox"] {
+    background: var(--surface-elevated) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--webkit-glass-blur) !important;
+    border: 1px solid var(--border-hairline) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 6px !important;
+    box-shadow: var(--shadow-drop) !important;
+}
+
+div[data-baseweb="popover"] li[role="option"] {
+    border-radius: var(--radius-sm) !important;
+    padding: 8px 14px !important;
+    font-size: 0.90rem !important;
+    color: var(--text-primary) !important;
+    transition: background var(--duration-fast) ease !important;
+}
+
+div[data-baseweb="popover"] li[role="option"]:hover,
+div[data-baseweb="popover"] li[aria-selected="true"] {
+    background: var(--accent-blue-subtle) !important;
+    color: var(--accent-blue) !important;
+}
+
+/* =============================================================================
+   ACCESSIBILITY: REDUCE MOTION
+   ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* =============================================================================
+   ENHANCED HOVER & MICRO-INTERACTION LAYER
+   Premium transitions for all interactive surfaces
+   ============================================================================= */
+
+/* Table row hover highlight */
+tr {
+    transition: background-color 0.15s ease !important;
+}
+tr:hover {
+    background: rgba(10, 132, 255, 0.05) !important;
+}
+
+/* Metric grid cells */
+div[data-testid="metric-container"] {
+    transition: transform 0.22s cubic-bezier(0.22,1,0.36,1),
+                box-shadow 0.22s cubic-bezier(0.22,1,0.36,1) !important;
+    border-radius: var(--radius-md) !important;
+}
+div[data-testid="metric-container"]:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 28px -6px rgba(0,0,0,0.45),
+                0 0 18px rgba(10,132,255,0.10) !important;
+}
+
+/* File uploader drop zone lift */
+div[data-testid="stFileUploaderDropzone"] {
+    transition: border-color 0.20s ease,
+                background 0.20s ease,
+                transform 0.22s cubic-bezier(0.22,1,0.36,1) !important;
+}
+div[data-testid="stFileUploaderDropzone"]:hover {
+    border-color: var(--accent-blue) !important;
+    background: var(--accent-blue-subtle) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Expandable / detail sections */
+details summary {
+    cursor: pointer;
+    transition: color 0.15s ease !important;
+}
+details summary:hover {
+    color: var(--accent-blue) !important;
+}
+
+/* Progress bar smooth reveal */
+div[data-testid="stProgress"] > div > div {
+    transition: width 0.60s cubic-bezier(0.22,1,0.36,1) !important;
+}
+
+/* Streamlit info/success/warning banners — fade in */
+div[data-testid="stAlert"] {
+    animation: fadeInUp 0.35s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+/* Image hover — subtle scale */
+img {
+    transition: transform 0.28s cubic-bezier(0.22,1,0.36,1),
+                filter 0.22s ease !important;
+}
+img:hover {
+    transform: scale(1.015) !important;
+    filter: brightness(1.04) !important;
+}
+
+/* Selectbox hover ring */
+div[data-testid="stSelectbox"] div[data-baseweb="select"] > div {
+    transition: border-color 0.15s ease,
+                background 0.18s ease,
+                box-shadow 0.18s ease,
+                transform 0.18s cubic-bezier(0.22,1,0.36,1) !important;
+}
+div[data-testid="stSelectbox"] div[data-baseweb="select"] > div:hover {
+    transform: translateY(-1px) !important;
+}
+
+/* Checkbox hover */
+div[data-testid="stCheckbox"] label {
+    transition: color 0.15s ease !important;
+}
+div[data-testid="stCheckbox"] label:hover {
+    color: var(--accent-blue) !important;
+}
+
+/* Horizontal dividers — fade in from left */
+hr {
+    animation: fadeInLeft 0.45s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+/* Column blocks — staggered reveal */
+div[data-testid="column"]:nth-child(1) { animation: fadeInUp 0.42s cubic-bezier(0.16,1,0.3,1) 0.05s both; }
+div[data-testid="column"]:nth-child(2) { animation: fadeInUp 0.42s cubic-bezier(0.16,1,0.3,1) 0.10s both; }
+div[data-testid="column"]:nth-child(3) { animation: fadeInUp 0.42s cubic-bezier(0.16,1,0.3,1) 0.16s both; }
+
+/* Sidebar links & nav items */
+section[data-testid="stSidebar"] a,
+section[data-testid="stSidebar"] button {
+    transition: color 0.15s ease,
+                background 0.18s ease,
+                padding-left 0.18s ease !important;
+}
+section[data-testid="stSidebar"] a:hover {
+    color: var(--accent-blue) !important;
+    padding-left: 4px !important;
+}
+
+/* Code / monospace blocks */
+code, pre {
+    transition: background 0.15s ease !important;
+}
+code:hover {
+    background: rgba(10,132,255,0.08) !important;
+}
+
+/* Spinner (loading state) smooth pulse */
+div[data-testid="stSpinner"] svg {
+    animation: subtlePulse 1.2s ease-in-out infinite;
+}
+
+/* Tab panels */
+div[data-testid="stTabs"] button[role="tab"] {
+    transition: color 0.15s ease,
+                border-color 0.18s ease,
+                background 0.18s ease !important;
+}
+div[data-testid="stTabs"] button[role="tab"]:hover {
+    color: var(--accent-blue) !important;
+    background: var(--accent-blue-subtle) !important;
+}
+div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
+    color: var(--accent-blue) !important;
+    border-bottom-color: var(--accent-blue) !important;
+}
+
+/* Tooltip & popover fade-in */
+div[data-baseweb="tooltip"],
+div[role="tooltip"] {
+    animation: tooltipFadeIn 0.18s ease-out both;
+}
+
+/* =============================================================================
+   NAVIGATION BAR — Hover Transition Upgrade
+   ============================================================================= */
+.apple-nav-bar {
+    transition: box-shadow 0.30s var(--ease-apple),
+                border-color 0.22s ease,
+                background 0.22s ease;
+}
+
+/* Model status badge inner glow on hover */
+.apple-card [style*="border-radius: var(--radius-pill)"],
+.apple-card [style*="border-radius:9999px"] {
+    transition: box-shadow 0.22s ease, transform 0.18s ease !important;
+}
+.apple-card [style*="border-radius: var(--radius-pill)"]:hover,
+.apple-card [style*="border-radius:9999px"]:hover {
+    transform: scale(1.04) !important;
+}
+
+/* =============================================================================
+   SMOOTH LINK UNDERLINE TRANSITION
+   ============================================================================= */
+a {
+    transition: color 0.15s ease, opacity 0.15s ease !important;
+    text-decoration: none;
+}
+a:hover {
+    opacity: 0.82 !important;
+}

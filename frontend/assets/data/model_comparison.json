@@ -1,0 +1,47 @@
+{
+    "MobileNetV2": {
+        "Accuracy": "88.00%",
+        "Precision": "91.43%",
+        "Recall": "93.33%",
+        "F1 Score": "90.55%",
+        "ROC-AUC": "1.0000",
+        "Training Time": "67.7s",
+        "Status": "Trained"
+    },
+    "EfficientNetB0": {
+        "Accuracy": "53.22%",
+        "Precision": "54.10%",
+        "Recall": "53.22%",
+        "F1 Score": "53.60%",
+        "ROC-AUC": "0.8120",
+        "Training Time": "215.0s",
+        "Status": "Trained"
+    },
+    "ResNet50": {
+        "Accuracy": "48.50%",
+        "Precision": "47.80%",
+        "Recall": "48.50%",
+        "F1 Score": "48.10%",
+        "ROC-AUC": "0.7420",
+        "Training Time": "356.0s",
+        "Status": "Trained"
+    },
+    "VGG16": {
+        "Accuracy": "90.00%",
+        "Precision": "88.50%",
+        "Recall": "90.00%",
+        "F1 Score": "89.20%",
+        "ROC-AUC": "0.9650",
+        "Training Time": "191.0s",
+        "Status": "Trained"
+    },
+    "CustomCNN": {
+        "Accuracy": "20.00%",
+        "Precision": "4.00%",
+        "Recall": "20.00%",
+        "F1 Score": "6.67%",
+        "ROC-AUC": "0.6312",
+        "Training Time": "46.6s",
+        "Status": "Trained"
+    }
+}

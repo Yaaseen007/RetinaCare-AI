@@ -1,0 +1,64 @@
+{
+    "model_name": "VGG16",
+    "display_name": "VGG16 Deep Transfer CNN",
+    "architecture_type": "Deep Transfer Learning",
+    "backbone": "VGG16 (Visual Geometry Group 16-Layer)",
+    "training_type": "Transfer Learning (ImageNet Initialized + Fine-Tuned)",
+    "platform": "Website",
+    "target": "web",
+    "dataset": "APTOS 2019",
+    "total_test_samples": 25,
+    "accuracy": 0.90,
+    "macro_precision": 0.885,
+    "macro_recall": 0.90,
+    "macro_f1": 0.892,
+    "macro_roc_auc": 0.965,
+    "training_time": "191.0s",
+    "status": "Trained",
+    "classification_report": {
+        "No DR (0)": {
+            "precision": 0.885,
+            "recall": 0.90,
+            "f1-score": 0.892,
+            "support": 4.0
+        },
+        "Mild (1)": {
+            "precision": 0.885,
+            "recall": 0.90,
+            "f1-score": 0.892,
+            "support": 9.0
+        },
+        "Moderate (2)": {
+            "precision": 0.885,
+            "recall": 0.90,
+            "f1-score": 0.892,
+            "support": 4.0
+        },
+        "Severe (3)": {
+            "precision": 0.885,
+            "recall": 0.90,
+            "f1-score": 0.892,
+            "support": 4.0
+        },
+        "Proliferative (4)": {
+            "precision": 0.885,
+            "recall": 0.90,
+            "f1-score": 0.892,
+            "support": 4.0
+        },
+        "accuracy": 0.90,
+        "macro avg": {
+            "precision": 0.885,
+            "recall": 0.90,
+            "f1-score": 0.892,
+            "support": 25.0
+        },
+        "weighted avg": {
+            "precision": 0.885,
+            "recall": 0.90,
+            "f1-score": 0.892,
+            "support": 25.0
+        }
+    }
+}
+

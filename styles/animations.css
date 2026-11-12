@@ -1,0 +1,328 @@
+/* ==============================================================================
+   RetinaCare AI - Apple Motion & Interaction Physics
+   Enhanced with rich hover, transition, shimmer, fade, and micro-interaction effects
+   ============================================================================== */
+
+/* -----------------------------------------------------------------------------
+   Page & Section Transition
+   ----------------------------------------------------------------------------- */
+@keyframes applePageEnter {
+    0%   { opacity: 0; transform: translateY(10px) scale(0.995); filter: blur(4px); }
+    100% { opacity: 1; transform: translateY(0)    scale(1);     filter: blur(0);   }
+}
+.apple-page-surface {
+    animation: applePageEnter 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity, filter;
+}
+
+/* -----------------------------------------------------------------------------
+   Section Fade-In-Up (staggered content reveals)
+   ----------------------------------------------------------------------------- */
+@keyframes fadeInUp {
+    0%   { opacity: 0; transform: translateY(24px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInScale {
+    0%   { opacity: 0; transform: scale(0.92) translateY(12px); }
+    100% { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+@keyframes fadeInLeft {
+    0%   { opacity: 0; transform: translateX(-20px); }
+    100% { opacity: 1; transform: translateX(0);     }
+}
+@keyframes fadeInRight {
+    0%   { opacity: 0; transform: translateX(20px); }
+    100% { opacity: 1; transform: translateX(0);    }
+}
+
+.fade-in-up           { animation: fadeInUp    0.50s cubic-bezier(0.16,1,0.3,1) both; }
+.fade-in-scale        { animation: fadeInScale 0.48s cubic-bezier(0.22,1,0.36,1) both; }
+.fade-in-left         { animation: fadeInLeft  0.45s cubic-bezier(0.16,1,0.3,1) both; }
+.fade-in-right        { animation: fadeInRight 0.45s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* Staggered delays for grid items */
+.stagger-1  { animation-delay: 0.06s;  }
+.stagger-2  { animation-delay: 0.12s;  }
+.stagger-3  { animation-delay: 0.18s;  }
+.stagger-4  { animation-delay: 0.24s;  }
+.stagger-5  { animation-delay: 0.30s;  }
+.stagger-6  { animation-delay: 0.36s;  }
+
+/* -----------------------------------------------------------------------------
+   Staggered Hero Sequence
+   ----------------------------------------------------------------------------- */
+@keyframes heroFadeSlide {
+    0%   { opacity: 0; transform: translateY(16px); }
+    100% { opacity: 1; transform: translateY(0);    }
+}
+@keyframes heroScaleEnter {
+    0%   { opacity: 0; transform: scale(0.94); }
+    100% { opacity: 1; transform: scale(1);    }
+}
+
+.hero-animate-badge    { animation: heroFadeSlide  0.40s cubic-bezier(0.16,1,0.3,1) both; animation-delay: 0.05s; }
+.hero-animate-heading  { animation: heroFadeSlide  0.50s cubic-bezier(0.16,1,0.3,1) both; animation-delay: 0.12s; }
+.hero-animate-subhead  { animation: heroFadeSlide  0.50s cubic-bezier(0.16,1,0.3,1) both; animation-delay: 0.22s; }
+.hero-animate-actions  { animation: heroScaleEnter 0.45s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.32s; }
+.hero-animate-features { animation: heroFadeSlide  0.55s cubic-bezier(0.16,1,0.3,1) both; animation-delay: 0.42s; }
+
+/* -----------------------------------------------------------------------------
+   Shimmer / Hover Glow on Cards
+   ----------------------------------------------------------------------------- */
+@keyframes shimmerSlide {
+    0%   { transform: translateX(-100%) skewX(-15deg); }
+    100% { transform: translateX(250%)  skewX(-15deg); }
+}
+
+/* Shimmer pseudo-element — attach to containers with position:relative & overflow:hidden */
+.shimmer-hover {
+    position: relative;
+    overflow: hidden;
+}
+.shimmer-hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        105deg,
+        transparent 35%,
+        rgba(255,255,255,0.07) 50%,
+        transparent 65%
+    );
+    transform: translateX(-100%) skewX(-15deg);
+    transition: none;
+    pointer-events: none;
+}
+.shimmer-hover:hover::after {
+    animation: shimmerSlide 0.65s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+/* -----------------------------------------------------------------------------
+   Card Lift & Border Glow on Hover
+   ----------------------------------------------------------------------------- */
+@keyframes borderGlow {
+    0%,100% { box-shadow: 0 0 0 0 rgba(10,132,255,0); }
+    50%     { box-shadow: 0 0 16px 3px rgba(10,132,255,0.18); }
+}
+
+.card-hover-lift {
+    transition: transform 0.26s cubic-bezier(0.22,1,0.36,1),
+                box-shadow 0.26s cubic-bezier(0.22,1,0.36,1),
+                border-color 0.18s ease;
+}
+.card-hover-lift:hover {
+    transform: translateY(-4px) scale(1.008);
+    box-shadow: 0 14px 38px -6px rgba(0,0,0,0.55),
+                0 0 24px rgba(10,132,255,0.14);
+    border-color: rgba(10,132,255,0.28) !important;
+}
+.card-hover-lift:active {
+    transform: translateY(1px) scale(0.997);
+    transition-duration: 80ms;
+}
+
+/* -----------------------------------------------------------------------------
+   Retinal Scanning Beam Animation (AI Processing State)
+   ----------------------------------------------------------------------------- */
+@keyframes laserScanVertical {
+    0%   { top: 0%;  opacity: 0.2;  }
+    15%  {           opacity: 0.95; }
+    50%  { top: 96%; opacity: 0.95; }
+    85%  {           opacity: 0.95; }
+    100% { top: 0%;  opacity: 0.2;  }
+}
+
+.retinal-scan-overlay {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; overflow: hidden;
+    border-radius: var(--radius-md); z-index: 10;
+}
+.retinal-scan-line {
+    position: absolute; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(10,132,255,0.4) 15%,
+        #0A84FF 50%,
+        rgba(10,132,255,0.4) 85%,
+        transparent 100%);
+    box-shadow: 0 0 16px 3px rgba(10,132,255,0.75), 0 0 32px 6px rgba(10,132,255,0.35);
+    animation: laserScanVertical 2.2s cubic-bezier(0.45,0,0.55,1) infinite;
+    will-change: top, opacity;
+}
+
+@keyframes retinalPulseGlow {
+    0%,100% { box-shadow: 0 0 0 0  rgba(10,132,255,0.2); }
+    50%     { box-shadow: 0 0 0 12px rgba(10,132,255,0); }
+}
+.retinal-processing-active {
+    animation: retinalPulseGlow 2s cubic-bezier(0.25,1,0.5,1) infinite;
+}
+
+/* -----------------------------------------------------------------------------
+   Status Badge Glow (READY = green, NOT TRAINED = amber)
+   ----------------------------------------------------------------------------- */
+@keyframes glowGreen {
+    0%,100% { box-shadow: 0 0 0 0   rgba(48,209,88,0.3);  }
+    50%     { box-shadow: 0 0 12px 4px rgba(48,209,88,0.18); }
+}
+@keyframes glowAmber {
+    0%,100% { box-shadow: 0 0 0 0   rgba(255,159,10,0.3);  }
+    50%     { box-shadow: 0 0 12px 4px rgba(255,159,10,0.18); }
+}
+
+.status-glow-ready   { animation: glowGreen 2.4s ease-in-out infinite; }
+.status-glow-pending { animation: glowAmber 2.4s ease-in-out infinite; }
+
+/* -----------------------------------------------------------------------------
+   Result Card Reveal Physics
+   ----------------------------------------------------------------------------- */
+@keyframes appleResultReveal {
+    0%   { opacity: 0; transform: scale(0.96) translateY(12px); filter: blur(6px);   }
+    60%  { opacity: 0.96; transform: scale(1.008) translateY(-2px); filter: blur(0.5px); }
+    100% { opacity: 1; transform: scale(1)    translateY(0);    filter: blur(0);   }
+}
+.apple-result-card {
+    animation: appleResultReveal 0.52s cubic-bezier(0.22,1,0.36,1) both;
+    will-change: transform, opacity, filter;
+}
+
+/* -----------------------------------------------------------------------------
+   Horizontal Probability Bars Animation
+   ----------------------------------------------------------------------------- */
+@keyframes growBarWidth {
+    0%   { width: 0% !important; opacity: 0.3; }
+    100% { opacity: 1; }
+}
+.prob-bar-animate { animation: growBarWidth 0.75s cubic-bezier(0.22,1,0.36,1) both; will-change: width; }
+.prob-row-0 { animation-delay: 0.05s; }
+.prob-row-1 { animation-delay: 0.12s; }
+.prob-row-2 { animation-delay: 0.19s; }
+.prob-row-3 { animation-delay: 0.26s; }
+.prob-row-4 { animation-delay: 0.33s; }
+
+/* -----------------------------------------------------------------------------
+   Confidence Ring / Arc Reveal
+   ----------------------------------------------------------------------------- */
+@keyframes spinIn {
+    0%   { transform: rotate(-90deg); stroke-dashoffset: 502; }
+    100% { stroke-dashoffset: 0; }
+}
+
+/* -----------------------------------------------------------------------------
+   Pill Pulsing Micro-Animations
+   ----------------------------------------------------------------------------- */
+@keyframes subtlePulse {
+    0%,100% { opacity: 0.7; transform: scale(1);    }
+    50%     { opacity: 1;   transform: scale(1.08); }
+}
+.pulse-indicator {
+    display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%;
+    animation: subtlePulse 2s ease-in-out infinite;
+}
+
+/* -----------------------------------------------------------------------------
+   Tooltip Fade
+   ----------------------------------------------------------------------------- */
+@keyframes tooltipFadeIn {
+    0%   { opacity: 0; transform: translateY(4px); }
+    100% { opacity: 1; transform: translateY(0);   }
+}
+.tooltip-fade { animation: tooltipFadeIn 0.18s ease-out both; }
+
+/* -----------------------------------------------------------------------------
+   Image Preview Smooth Scale In
+   ----------------------------------------------------------------------------- */
+@keyframes imageScaleIn {
+    0%   { opacity: 0; transform: scale(0.96); }
+    100% { opacity: 1; transform: scale(1);    }
+}
+.image-preview-enter {
+    animation: imageScaleIn 0.42s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+/* -----------------------------------------------------------------------------
+   Skeleton Loading State
+   ----------------------------------------------------------------------------- */
+@keyframes skeletonShimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+}
+.skeleton-loader {
+    border-radius: var(--radius-sm);
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0.04) 25%,
+        rgba(255,255,255,0.10) 50%,
+        rgba(255,255,255,0.04) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+
+/* -----------------------------------------------------------------------------
+   Model Selector Card - Flip/Slide entrance
+   ----------------------------------------------------------------------------- */
+@keyframes slideDownReveal {
+    0%   { opacity: 0; transform: translateY(-8px) scaleY(0.96); }
+    100% { opacity: 1; transform: translateY(0)    scaleY(1);    }
+}
+.model-card-reveal {
+    animation: slideDownReveal 0.30s cubic-bezier(0.22,1,0.36,1) both;
+    transform-origin: top center;
+}
+
+/* -----------------------------------------------------------------------------
+   Navigation Tab Active Underline Slide
+   ----------------------------------------------------------------------------- */
+@keyframes tabUnderlineIn {
+    0%   { transform: scaleX(0); opacity: 0; }
+    100% { transform: scaleX(1); opacity: 1; }
+}
+.tab-underline-active {
+    animation: tabUnderlineIn 0.22s cubic-bezier(0.22,1,0.36,1) both;
+    transform-origin: left center;
+}
+
+/* -----------------------------------------------------------------------------
+   Button Press Ripple
+   ----------------------------------------------------------------------------- */
+@keyframes btnRipple {
+    0%   { transform: scale(0);   opacity: 0.5; }
+    100% { transform: scale(2.5); opacity: 0;   }
+}
+.btn-ripple-container {
+    position: relative; overflow: hidden;
+}
+.btn-ripple-container .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    width: 60px; height: 60px;
+    margin-top: -30px; margin-left: -30px;
+    animation: btnRipple 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
+    pointer-events: none;
+}
+
+/* -----------------------------------------------------------------------------
+   Metric Number Count-Up (visual cue — CSS only easing)
+   ----------------------------------------------------------------------------- */
+@keyframes numberReveal {
+    0%   { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0);   }
+}
+.metric-number-reveal {
+    animation: numberReveal 0.40s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* -----------------------------------------------------------------------------
+   Accessibility: Reduce Motion
+   ----------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
