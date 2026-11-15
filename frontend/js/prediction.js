@@ -87,7 +87,7 @@ class PredictionManager {
         } else {
             if (btn) {
                 btn.disabled = false;
-                btn.innerHTML = `⚡ Analyze Retinal Scan (VGG16)`;
+                btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="3"/></svg> <span>Run Clinical Inference (VGG16)</span>`;
             }
             if (statusBanner) statusBanner.style.display = "none";
             if (skeletonCard) skeletonCard.style.display = "none";
@@ -151,12 +151,12 @@ class PredictionManager {
             </div>
             <div class="model-switcher-pills">
                 <span class="model-switcher-btn active" style="cursor: default;">
-                    <span class="star-badge">★ Website Production Model</span>
+                    <span class="star-badge">Web Production Model</span>
                     <span class="switcher-name">VGG16 Deep CNN</span>
                     <span class="switcher-conf">${conf}% Confidence</span>
                 </span>
                 <span class="model-switcher-btn" style="cursor: default; opacity: 0.8; background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.08);">
-                    <span class="switcher-name">📱 MobileNetV2</span>
+                    <span class="switcher-name">MobileNetV2</span>
                     <span style="font-size:0.72rem; color: var(--text-tertiary); margin-left: 4px;">Reserved for Flutter Mobile App</span>
                 </span>
             </div>
@@ -329,7 +329,7 @@ class PredictionManager {
                         <div style="font-size: 0.78rem; color: var(--text-tertiary);">${alt.backbone || alt.architecture_type}</div>
                     </div>
                     <div class="consensus-badge ${agrees ? 'consensus-agree' : 'consensus-diverge'}">
-                        ${agrees ? '✓ Consensus Agreement' : '⚡ Perspective Divergence'}
+                        ${agrees ? 'Consensus Agreement' : 'Perspective Divergence'}
                     </div>
                 </div>
 

@@ -69,3 +69,13 @@ desktop.ini
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+
+# Unused ResNet50 model
+models/resnet50.keras
+
+# Dataset images - keep local only
+dataset/*
+!dataset/README.md
+
+# Local frontend backup
+frontend_backup/

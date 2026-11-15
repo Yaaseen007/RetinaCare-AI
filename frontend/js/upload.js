@@ -479,7 +479,7 @@ class UploadManager {
 
         const toast = document.createElement("div");
         toast.className = `toast-item toast-${type} fade-in-up`;
-        const icon = type === "error" ? "⚠️" : type === "success" ? "✓" : "ℹ️";
+        const icon = type === "error" ? "!" : type === "success" ? "✓" : "i";
         toast.innerHTML = `
             <span class="toast-icon">${icon}</span>
             <div class="toast-message">${message}</div>

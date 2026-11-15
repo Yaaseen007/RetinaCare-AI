@@ -1,105 +1,54 @@
 /* ==============================================================================
-   RetinaCare AI - iOS / Apple Motion Physics & Micro-Interactions
-   Smooth, hardware-accelerated transitions & scanning effects
+   RetinaCare AI - Clinical Motion & Interaction Transitions
+   Calm, purposeful transitions with zero continuous idle animation loops
    ============================================================================== */
 
-/* Page & View Transition */
-@keyframes applePageEnter {
-    0%   { opacity: 0; transform: translateY(12px) scale(0.992); filter: blur(4px); }
-    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+/* Page & Section View Enter */
+@keyframes viewEnter {
+    0%   { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .page-enter {
-    animation: applePageEnter var(--duration-page) var(--ease-enter) both;
-    will-change: transform, opacity, filter;
+    animation: viewEnter var(--duration-page) var(--ease-standard) both;
+    will-change: transform, opacity;
 }
 
-/* Staggered Content Reveals */
+/* Single Entry Fade Sequence */
 @keyframes fadeInUp {
-    0%   { opacity: 0; transform: translateY(20px); }
+    0%   { opacity: 0; transform: translateY(12px); }
     100% { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeInScale {
-    0%   { opacity: 0; transform: scale(0.94) translateY(10px); }
-    100% { opacity: 1; transform: scale(1) translateY(0); }
-}
+.fade-in-up { animation: fadeInUp var(--duration-card) var(--ease-standard) both; }
 
-.fade-in-up { animation: fadeInUp var(--duration-card) var(--ease-enter) both; }
-.fade-in-scale { animation: fadeInScale var(--duration-card) var(--ease-apple) both; }
+.stagger-1 { animation-delay: 0.04s; }
+.stagger-2 { animation-delay: 0.08s; }
+.stagger-3 { animation-delay: 0.12s; }
+.stagger-4 { animation-delay: 0.16s; }
+.stagger-5 { animation-delay: 0.20s; }
 
-.stagger-1 { animation-delay: 0.05s; }
-.stagger-2 { animation-delay: 0.10s; }
-.stagger-3 { animation-delay: 0.15s; }
-.stagger-4 { animation-delay: 0.20s; }
-.stagger-5 { animation-delay: 0.25s; }
-
-/* Hero Entrance Sequence */
-@keyframes heroBadgeEnter {
-    0%   { opacity: 0; transform: translateY(-8px) scale(0.95); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-@keyframes heroHeadingEnter {
-    0%   { opacity: 0; transform: translateY(16px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-.hero-animate-badge   { animation: heroBadgeEnter 0.40s var(--ease-enter) both 0.04s; }
-.hero-animate-heading { animation: heroHeadingEnter 0.50s var(--ease-enter) both 0.12s; }
-.hero-animate-subhead { animation: heroHeadingEnter 0.50s var(--ease-enter) both 0.20s; }
-.hero-animate-actions { animation: fadeInScale 0.45s var(--ease-apple) both 0.28s; }
-.hero-animate-cards   { animation: fadeInUp 0.55s var(--ease-enter) both 0.36s; }
-
-/* Apple Card Lift on Hover */
+/* Subtle Tactile Card Hover (Quiet, no bouncy scale) */
 .card-hover-lift {
-    transition: transform var(--duration-card) var(--ease-apple),
-                box-shadow var(--duration-card) var(--ease-apple),
+    transition: transform var(--duration-btn) var(--ease-standard),
+                box-shadow var(--duration-btn) var(--ease-standard),
                 border-color var(--duration-fast) ease;
 }
 .card-hover-lift:hover {
-    transform: translateY(-4px) scale(1.006);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-card-hover);
     border-color: var(--border-hover) !important;
 }
 .card-hover-lift:active {
-    transform: translateY(0) scale(0.996);
+    transform: translateY(0) scale(0.995);
     transition-duration: 80ms;
 }
 
-/* Shimmer on Hover */
-.shimmer-hover {
-    position: relative;
-    overflow: hidden;
-}
-.shimmer-hover::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        105deg,
-        transparent 35%,
-        rgba(255, 255, 255, 0.08) 50%,
-        transparent 65%
-    );
-    transform: translateX(-100%) skewX(-15deg);
-    pointer-events: none;
-}
-.shimmer-hover:hover::after {
-    animation: shimmerSlide 0.70s var(--ease-apple) forwards;
-}
-
-@keyframes shimmerSlide {
-    0%   { transform: translateX(-100%) skewX(-15deg); }
-    100% { transform: translateX(250%) skewX(-15deg); }
-}
-
-/* Retinal Scanning Beam Overlay (Analysis Active State) */
+/* Retinal Scan Line (Runs strictly during active model inference) */
 @keyframes laserScanVertical {
-    0%   { top: 0%; opacity: 0.3; }
-    15%  { opacity: 0.95; }
-    50%  { top: 96%; opacity: 0.95; }
-    85%  { opacity: 0.95; }
-    100% { top: 0%; opacity: 0.3; }
+    0%   { top: 2%; opacity: 0.4; }
+    50%  { top: 96%; opacity: 0.9; }
+    100% { top: 2%; opacity: 0.4; }
 }
 
 .retinal-scan-overlay {
@@ -115,27 +64,11 @@
     position: absolute;
     left: 0;
     right: 0;
-    height: 3px;
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(10, 132, 255, 0.3) 15%,
-        var(--accent-blue) 50%,
-        rgba(10, 132, 255, 0.3) 85%,
-        transparent 100%
-    );
-    box-shadow: 0 0 16px 3px rgba(10, 132, 255, 0.8), 0 0 32px 6px rgba(0, 199, 190, 0.4);
-    animation: laserScanVertical 2.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    height: 2px;
+    background: var(--accent-blue);
+    box-shadow: 0 0 8px 1px var(--accent-blue);
+    animation: laserScanVertical 2s var(--ease-standard) infinite;
     will-change: top, opacity;
-}
-
-@keyframes retinalPulseGlow {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(10, 132, 255, 0.25); }
-    50%      { box-shadow: 0 0 0 14px rgba(10, 132, 255, 0); }
-}
-
-.retinal-processing-active {
-    animation: retinalPulseGlow 1.8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
 
 /* Skeleton Loading Shimmer */
@@ -148,9 +81,9 @@
     border-radius: var(--radius-sm);
     background: linear-gradient(
         90deg,
-        rgba(255, 255, 255, 0.04) 25%,
-        rgba(255, 255, 255, 0.10) 50%,
-        rgba(255, 255, 255, 0.04) 75%
+        rgba(255, 255, 255, 0.03) 25%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.03) 75%
     );
     background-size: 200% 100%;
     animation: skeletonShimmer 1.5s ease-in-out infinite;
@@ -159,106 +92,46 @@
     background: linear-gradient(
         90deg,
         rgba(0, 0, 0, 0.04) 25%,
-        rgba(0, 0, 0, 0.09) 50%,
+        rgba(0, 0, 0, 0.08) 50%,
         rgba(0, 0, 0, 0.04) 75%
     );
     background-size: 200% 100%;
 }
 
-/* Primary Result Card Reveal */
-@keyframes appleResultReveal {
-    0%   { opacity: 0; transform: scale(0.96) translateY(14px); filter: blur(4px); }
-    60%  { opacity: 0.96; transform: scale(1.006) translateY(-2px); filter: blur(0.5px); }
-    100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+/* Diagnostic Result Card Reveal */
+@keyframes resultReveal {
+    0%   { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .apple-result-card {
-    animation: appleResultReveal var(--duration-reveal) var(--ease-apple) both;
-    will-change: transform, opacity, filter;
+    animation: resultReveal var(--duration-card) var(--ease-standard) both;
+    will-change: transform, opacity;
 }
 
 /* Horizontal Probability Bars Reveal */
 @keyframes growBarWidth {
-    0%   { width: 0% !important; opacity: 0.2; }
+    0%   { width: 0% !important; opacity: 0.3; }
     100% { opacity: 1; }
 }
 
 .prob-bar-animate {
-    animation: growBarWidth 0.70s var(--ease-apple) both;
+    animation: growBarWidth 0.60s var(--ease-standard) both;
     will-change: width;
 }
-.prob-row-0 { animation-delay: 0.04s; }
-.prob-row-1 { animation-delay: 0.10s; }
-.prob-row-2 { animation-delay: 0.16s; }
-.prob-row-3 { animation-delay: 0.22s; }
-.prob-row-4 { animation-delay: 0.28s; }
+.prob-row-0 { animation-delay: 0.03s; }
+.prob-row-1 { animation-delay: 0.07s; }
+.prob-row-2 { animation-delay: 0.11s; }
+.prob-row-3 { animation-delay: 0.15s; }
+.prob-row-4 { animation-delay: 0.19s; }
 
-/* Status Pulse Indicators */
-@keyframes subtlePulse {
-    0%, 100% { opacity: 0.7; transform: scale(1); }
-    50%      { opacity: 1; transform: scale(1.15); }
-}
-
+/* Status Dot (Static, no breathing pulse loop) */
 .pulse-dot {
     display: inline-block;
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    animation: subtlePulse 2s ease-in-out infinite;
-}
-
-/* Alternative Card Slide Transitions */
-@keyframes slideInRight {
-    0%   { opacity: 0; transform: translateX(24px) scale(0.98); }
-    100% { opacity: 1; transform: translateX(0) scale(1); }
-}
-@keyframes slideInLeft {
-    0%   { opacity: 0; transform: translateX(-24px) scale(0.98); }
-    100% { opacity: 1; transform: translateX(0) scale(1); }
-}
-
-.slide-in-right { animation: slideInRight 0.32s var(--ease-apple) both; }
-.slide-in-left  { animation: slideInLeft  0.32s var(--ease-apple) both; }
-
-/* Ripple on Button Tap */
-@keyframes btnRipple {
-    0%   { transform: scale(0); opacity: 0.45; }
-    100% { transform: scale(2.6); opacity: 0; }
-}
-.ripple-effect {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    width: 60px;
-    height: 60px;
-    margin-top: -30px;
-    margin-left: -30px;
-    animation: btnRipple 0.5s var(--ease-apple) forwards;
-    pointer-events: none;
-}
-
-/* Subtle Ambient Floating for Hero Visual Glass Cards */
-@keyframes ambientFloatSlow {
-    0%, 100% { transform: translateY(0px); }
-    50%      { transform: translateY(-7px); }
-}
-@keyframes ambientFloatDelay {
-    0%, 100% { transform: translateY(0px); }
-    50%      { transform: translateY(6px); }
-}
-@keyframes ambientRingRotate {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.float-slow {
-    animation: ambientFloatSlow 5s ease-in-out infinite;
-}
-.float-delayed {
-    animation: ambientFloatDelay 6.5s ease-in-out infinite 1.2s;
-}
-.float-orbital {
-    animation: ambientRingRotate 28s linear infinite;
+    background: var(--accent-emerald);
 }
 
 /* Reduced Motion Accessibility */
@@ -270,12 +143,14 @@
         scroll-behavior: auto !important;
     }
 
-    .float-slow,
-    .float-delayed,
-    .float-orbital,
-    .pulse-dot,
     .retinal-scan-line,
-    .skeleton-loader {
+    .skeleton-loader,
+    .page-enter,
+    .fade-in-up,
+    .apple-result-card,
+    .prob-bar-animate {
         animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
     }
 }
