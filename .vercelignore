@@ -1,0 +1,30 @@
+# Exclude Python backend, legacy apps, ML weights, datasets, and mobile code from Vercel.
+# Vercel deploys ONLY the static frontend/ directory.
+/app.py
+/requirements.txt
+/Dockerfile
+/.dockerignore
+/.gitignore
+/.gitattributes
+/render.yaml
+/README.md
+/assets/
+/backend/
+/components/
+/dataset/
+/frontend_backup/
+/models/
+/notebooks/
+/results/
+/retinacare_mobile/
+/src/
+/styles/
+/tests/
+/utils/
+/venv/
+/.venv/
+/.git/
+__pycache__/
+*.pyc
+*.keras
+*.h5

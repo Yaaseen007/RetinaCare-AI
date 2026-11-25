@@ -5,10 +5,9 @@
 
 // Centralized API Base URL with Multi-Tier Fallback:
 // 1. User manual override via Settings modal (stored in localStorage)
-// 2. Global window environment variable (window.__RETINACARE_API_URL__ from js/env.js)
-// 3. Current origin if served by FastAPI on port 8000
-// 4. Localhost fallback (http://127.0.0.1:8000) for local frontend servers
-// 5. Cloud backend fallback for production (Vercel)
+// 2. Local development auto-detection (localhost / 127.0.0.1 -> FastAPI on port 8000)
+// 3. Global window environment variable (window.__RETINACARE_API_URL__ from js/env.js / Vercel env var)
+// 4. Cloud backend fallback for production (Vercel)
 export function getApiBaseUrl() {
     try {
         const stored = localStorage.getItem("retinacare_api_url");
@@ -17,16 +16,12 @@ export function getApiBaseUrl() {
         }
     } catch (e) {}
 
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+        return window.location.port === "8000" ? window.location.origin : "http://127.0.0.1:8000";
+    }
+
     if (window.__RETINACARE_API_URL__ && window.__RETINACARE_API_URL__.trim()) {
         return window.__RETINACARE_API_URL__.trim().replace(/\/+$/, "");
-    }
-
-    if (window.location.port === "8000") {
-        return window.location.origin;
-    }
-
-    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-        return "http://127.0.0.1:8000";
     }
 
     return "https://yaaseen007-retinacare-ai.hf.space";
