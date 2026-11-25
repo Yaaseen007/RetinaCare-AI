@@ -1,0 +1,32 @@
+# Git and IDE files
+.git
+.github
+.gitignore
+.gitattributes
+.idea
+.vscode
+*.log
+
+# Python cache & virtual environment
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Large Datasets (Images do NOT belong inside backend image; models are in models/)
+dataset/
+
+# Mobile application (Flutter source is decoupled)
+retinacare_mobile/
+
+# Backups & local scratch notebooks
+frontend_backup/
+notebooks/
+results/*.png
+
+# Local sample generation scripts
+generate_samples.py
+prepare_kaggle_dataset.py
+add_eishkaran_dataset.py

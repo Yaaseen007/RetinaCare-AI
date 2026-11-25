@@ -615,5 +615,8 @@ def root_redirect(request: Request):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("backend.main:app", host="127.0.0.1", port=8000, reload=False)
+    host = os.environ.get("HOST", "0.0.0.0")
+    port = int(os.environ.get("PORT", "8000"))
+    logger.info(f"Starting RetinaCare AI Backend on {host}:{port}")
+    uvicorn.run("backend.main:app", host=host, port=port, reload=False)
 

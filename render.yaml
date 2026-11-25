@@ -1,0 +1,25 @@
+# ==============================================================================
+# RetinaCare AI - Render Infrastructure Blueprint
+# NOTE: Render Free Tier provides 512 MB RAM. TensorFlow inference with VGG16
+# requires ~586-634 MB RAM, which may trigger Out-Of-Memory (OOM Exit 137).
+# For completely free deployment with 16 GB RAM, Hugging Face Spaces Docker SDK
+# is the recommended primary backend host.
+# ==============================================================================
+
+services:
+  - type: web
+    name: retinacare-ai-backend
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: starter  # Note: Starter (1 GB RAM, $7/mo) or Hugging Face Spaces (16 GB RAM, $0 FREE)
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: HOST
+        value: 0.0.0.0
+      - key: TF_CPP_MIN_LOG_LEVEL
+        value: 3
+      - key: TF_ENABLE_ONEDNN_OPTS
+        value: 0
+    healthCheckPath: /api/health

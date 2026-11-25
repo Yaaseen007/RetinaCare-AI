@@ -3,12 +3,47 @@
  * Standardized for VGG16 and MobileNetV2 architectures and ICDR 5-stage grading.
  */
 
-// Centralized API Base URL
-// In production or local FastAPI hosting, default to current origin if port 8000, else http://127.0.0.1:8000
-const isPort8000 = window.location.port === "8000";
-export const API_BASE_URL = isPort8000 
-    ? window.location.origin 
-    : (window.__RETINACARE_API_URL__ || "http://127.0.0.1:8000");
+// Centralized API Base URL with Multi-Tier Fallback:
+// 1. User manual override via Settings modal (stored in localStorage)
+// 2. Global window environment variable (window.__RETINACARE_API_URL__ from js/env.js)
+// 3. Current origin if served by FastAPI on port 8000
+// 4. Localhost fallback (http://127.0.0.1:8000) for local frontend servers
+// 5. Cloud backend fallback for production (Vercel)
+export function getApiBaseUrl() {
+    try {
+        const stored = localStorage.getItem("retinacare_api_url");
+        if (stored && stored.trim()) {
+            return stored.trim().replace(/\/+$/, "");
+        }
+    } catch (e) {}
+
+    if (window.__RETINACARE_API_URL__ && window.__RETINACARE_API_URL__.trim()) {
+        return window.__RETINACARE_API_URL__.trim().replace(/\/+$/, "");
+    }
+
+    if (window.location.port === "8000") {
+        return window.location.origin;
+    }
+
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+        return "http://127.0.0.1:8000";
+    }
+
+    return "https://yaaseen007-retinacare-ai.hf.space";
+}
+
+export let API_BASE_URL = getApiBaseUrl();
+
+export function setApiBaseUrl(newUrl) {
+    if (!newUrl) return getApiBaseUrl();
+    const clean = newUrl.trim().replace(/\/+$/, "");
+    try {
+        localStorage.setItem("retinacare_api_url", clean);
+    } catch (e) {}
+    window.__RETINACARE_API_URL__ = clean;
+    API_BASE_URL = clean;
+    return API_BASE_URL;
+}
 
 // The strictly retained deep learning architectures
 // Platform Model Allocation: VGG16 exclusively for Website, MobileNetV2 exclusively for Mobile

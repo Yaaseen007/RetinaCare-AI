@@ -3,7 +3,15 @@
  * Handles network timeouts, FormData multipart serialization, response parsing, and errors.
  */
 
-import { API_BASE_URL } from "./config.js";
+import { API_BASE_URL, getApiBaseUrl } from "./config.js";
+
+/**
+ * Returns the active base URL dynamically to ensure runtime updates (e.g. from Settings)
+ * take effect immediately without requiring a browser reload.
+ */
+function getBase() {
+    return typeof getApiBaseUrl === "function" ? getApiBaseUrl() : API_BASE_URL;
+}
 
 export class APIError extends Error {
     constructor(message, status = 0, detail = null, isNetworkError = false) {
@@ -42,7 +50,7 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 45000) {
  * Pings GET /api/health to check service availability.
  */
 export async function checkHealth(timeoutMs = 4000) {
-    const url = `${API_BASE_URL}/api/health`;
+    const url = `${getBase()}/api/health`;
     try {
         const res = await fetchWithTimeout(url, { method: "GET" }, timeoutMs);
         if (!res.ok) {
@@ -51,7 +59,7 @@ export async function checkHealth(timeoutMs = 4000) {
         return await res.json();
     } catch (err) {
         if (err instanceof APIError) throw err;
-        throw new APIError(`Cannot connect to RetinaCare API at ${API_BASE_URL}`, 0, err.message, true);
+        throw new APIError(`Cannot connect to RetinaCare API at ${getBase()}`, 0, err.message, true);
     }
 }
 
@@ -59,7 +67,7 @@ export async function checkHealth(timeoutMs = 4000) {
  * Fetches list of all neural models from GET /api/models.
  */
 export async function fetchModels(timeoutMs = 6000) {
-    const url = `${API_BASE_URL}/api/models`;
+    const url = `${getBase()}/api/models`;
     try {
         const res = await fetchWithTimeout(url, { method: "GET" }, timeoutMs);
         if (!res.ok) {
@@ -82,7 +90,7 @@ export async function fetchModels(timeoutMs = 6000) {
  * @param {number} timeoutMs - Max execution duration (default 90s)
  */
 export async function compareModels(imageBlob, filename = "retinal_image.jpg", timeoutMs = 90000) {
-    const url = `${API_BASE_URL}/api/compare`;
+    const url = `${getBase()}/api/compare`;
     const formData = new FormData();
     formData.append("file", imageBlob, filename);
 
@@ -121,7 +129,7 @@ export async function compareModels(imageBlob, filename = "retinal_image.jpg", t
  * @param {number} timeoutMs - Max execution duration (default 60s)
  */
 export async function predictWeb(imageBlob, filename = "retinal_image.jpg", timeoutMs = 60000) {
-    const url = `${API_BASE_URL}/api/predict/web`;
+    const url = `${getBase()}/api/predict/web`;
     const formData = new FormData();
     formData.append("file", imageBlob, filename);
     formData.append("confidence_threshold", "50.0");
@@ -160,7 +168,7 @@ export async function predictWeb(imageBlob, filename = "retinal_image.jpg", time
  * @param {number} timeoutMs - Max execution duration (default 60s)
  */
 export async function predictMobile(imageBlob, filename = "retinal_image.jpg", timeoutMs = 60000) {
-    const url = `${API_BASE_URL}/api/predict/mobile`;
+    const url = `${getBase()}/api/predict/mobile`;
     const formData = new FormData();
     formData.append("file", imageBlob, filename);
     formData.append("confidence_threshold", "50.0");
@@ -195,7 +203,7 @@ export async function predictMobile(imageBlob, filename = "retinal_image.jpg", t
  * Sends fundus image to POST /api/predict for a single specific neural model.
  */
 export async function predictSingle(imageBlob, modelName = "VGG16", confidenceThreshold = 50.0, filename = "retinal_image.jpg", timeoutMs = 60000) {
-    const url = `${API_BASE_URL}/api/predict`;
+    const url = `${getBase()}/api/predict`;
     const formData = new FormData();
     formData.append("file", imageBlob, filename);
     formData.append("model_name", modelName);
@@ -232,7 +240,7 @@ export async function predictSingle(imageBlob, modelName = "VGG16", confidenceTh
  * Fetches offline telemetry metrics from GET /api/model-metrics, falling back to static JSON if offline.
  */
 export async function fetchModelMetrics(timeoutMs = 6000) {
-    const url = `${API_BASE_URL}/api/model-metrics`;
+    const url = `${getBase()}/api/model-metrics`;
     try {
         const res = await fetchWithTimeout(url, { method: "GET" }, timeoutMs);
         if (res.ok) {
